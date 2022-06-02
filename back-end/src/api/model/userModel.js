@@ -1,4 +1,4 @@
-const { User } = require('../../database/models/index');
+const User = require('../../database/models/user');
 
 class UserModel {
   static async findOne(email) {

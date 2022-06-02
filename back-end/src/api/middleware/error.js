@@ -1,6 +1,8 @@
-const midErr = (err, req, res) => {
-  console.error(err);
-  return res.status(501).end();
+const midErr = (err, _req, res, _next) => {
+  if (err.status) {
+    return res.status(err.status).json(err.message);
+  }
+  return res.status(501).json('Internal Server Error');
 };
 
 module.exports = { midErr };

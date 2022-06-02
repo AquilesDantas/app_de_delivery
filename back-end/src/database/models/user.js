@@ -67,5 +67,4 @@ User.init(
   }
 );
 
-User.findAll();
 module.exports = User;

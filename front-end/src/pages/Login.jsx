@@ -1,10 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import logo from '../images/ZéBirita.jpeg';
 import '../App.css';
 import postLogin from '../API/Request';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
-  // const [isEnable, setIsEnable] = useState(false);
+  const [message, setMessage] = useState('');
+  const [hidden, setHidden] = useState(true);
+
+  // useEffect(() => {
+  // }, [message]);
 
   const form = useRef();
 
@@ -14,10 +19,14 @@ const Login = () => {
     const emailLogin = formLogin.email.value;
     const passwordLogin = formLogin.password.value;
     try {
-      postLogin(emailLogin, passwordLogin);
+      const response = await postLogin(emailLogin, passwordLogin);
+      // const { token, user } = response.data;
+      // console.log(response);
+      setHidden(true);
       formLogin.reset();
     } catch (error) {
-      console.log(error);
+      setMessage(error.response.data);
+      setHidden(false);
     }
   };
 
@@ -38,16 +47,28 @@ const Login = () => {
               required
             />
           </label>
-          <input
-            name="password"
-            type="password"
-            required
-          />
+          <label htmlFor="input-password">
+            <input
+              id="input-password"
+              name="password"
+              type="password"
+              placeholder="password"
+              required
+            />
+          </label>
 
           <button type="submit"> LOGIN </button>
         </form>
+        <Link to="/register">
+          <button type="button"
+          >
+            Ainda não tenho conta
+          </button>
+        </Link>
+        { !hidden && <span>{ message }</span> } 
       </section>
     </div>
   );
 };
+
 export default Login;

@@ -5,7 +5,7 @@ class LoginService {
   static async login(email, password) {
     const userdata = await UserModel.findOne(email);
     if (!userdata) {
-      return { code: 401, message: 'User not found' };
+      return { code: 404, message: 'User not found' };
     }
     if (!ServiceAuth.authPassword(userdata.password, ServiceAuth.encrypt(password))) {
       return { code: 401, message: 'invalid password' };

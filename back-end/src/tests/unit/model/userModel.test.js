@@ -3,11 +3,17 @@ const sinon = require('sinon');
 const User = require('../../../database/models/user');
 const UserModel = require('../../../api/model/userModel');
 const users = require('../mocks/users');
+const { beforeFindAfterExpandIncludeAll } = require('../../../database/models/user');
 
 const UserMock = {
   findOne: sinon.stub(User, 'findOne'),
 } 
+
+
 describe('Testa UserModel', () => {
+  after(() => {
+    UserMock.findOne.restore()
+  })
   let user;
   describe('Se o usuário não existe', () => {
     before(async () => {

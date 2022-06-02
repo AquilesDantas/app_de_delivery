@@ -4,13 +4,14 @@ import Provider from './context/Provider';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import './App.css';
+import Home from './pages/Home';
 
 function App() {
   return (
     <Provider>
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={ } /> */}
+          <Route path="/" element={ <Home /> } /> 
           <Route path="/login" element={ <Login /> } />
           <Route path="/register" element={ <Register />} />
         </Routes>

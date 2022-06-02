@@ -1,4 +1,3 @@
-'use strict';
 const {
   Model
 } = require('sequelize');
@@ -26,13 +25,14 @@ module.exports = (sequelize, DataTypes) => {
     totalPrice: DataTypes.NUMBER,
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.NUMBER,
-    saleDate: DataTypes.DATETIME,
+    saleDate: DataTypes.DATE,
     status: DataTypes.STRING
   }, {
     sequelize,
     underscored: true,
     timestamps: false,
     modelName: 'Sale',
+    tableName: "sales"
   });
   return Sale;
 };

@@ -5,11 +5,24 @@ import postLogin from '../API/Request';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [hidden, setHidden] = useState(true);
+  const [isDisable, setIsDisable] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  // useEffect(() => {
-  // }, [message]);
+  const validatePassword = (password) => password && password.length >= 6;
+
+  const validateEmail = (email) =>
+    email && /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+
+  useEffect(() => {
+    if (validateEmail(email) && validatePassword(password)) {
+      setIsDisable(false);
+    } else {
+      setIsDisable(true);
+    }
+  }, [password, email]);
 
   const form = useRef();
 
@@ -33,39 +46,52 @@ const Login = () => {
   return (
     <div>
       <section>
-        <img className="logo" src={ logo } alt="logo zé birita" />
+        <img className="logo" src={logo} alt="logo zé birita" />
       </section>
       <section>
-        <form ref={ form } onSubmit={ (e) => handleSubmit(e) }>
+        <form ref={form} onSubmit={(e) => handleSubmit(e)}>
           <label htmlFor="input-email">
             Login
             <input
+              data-testid="common_login__input-email"
               id="input-email"
               placeholder="email@trybeer.com"
               name="email"
               type="email"
+              onChange={({ target }) => setEmail(target.value)}
               required
             />
           </label>
           <label htmlFor="input-password">
             <input
               id="input-password"
+              data-testid="common_login__input-password"
               name="password"
               type="password"
               placeholder="password"
+              onChange={({ target }) => setPassword(target.value)}
               required
             />
           </label>
 
-          <button type="submit"> LOGIN </button>
+          <button
+            data-testid="common_login__button-login"
+            type="submit"
+            disabled={isDisable}
+          >
+            LOGIN
+          </button>
         </form>
         <Link to="/register">
-          <button type="button"
-          >
+          <button data-testid="common_login__button-register" type="button">
             Ainda não tenho conta
           </button>
         </Link>
-        { !hidden && <span>{ message }</span> } 
+        {!hidden && (
+          <span data-testid="common_login__element-invalid-email">
+            {message}
+          </span>
+        )}
       </section>
     </div>
   );

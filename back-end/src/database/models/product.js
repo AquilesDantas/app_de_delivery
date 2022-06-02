@@ -15,13 +15,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Product.init({
     name: DataTypes.STRING,
-    price: DataTypes.NUMBER,
+    price: DataTypes.DECIMAL(4,2),
     urlImage: DataTypes.STRING
   }, {
     sequelize,
     underscored: true,
     timestamps: false,
     modelName: 'Product',
+    tableName: 'products'
   });
   return Product;
 };

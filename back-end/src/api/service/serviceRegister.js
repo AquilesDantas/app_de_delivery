@@ -7,14 +7,17 @@ class registerService {
     const role = 'costumer';
     const encryptedPassword = ServiceAuth.encrypt(password);
     const newUser = await RegisterModel.create({ name, email, password: encryptedPassword, role });
+    const token = ServiceAuth.getToken(email);
     return { code: 201,
-      message: {
-        name,
-        email,
-        role: role,
+      message: { user: {
+        id: newUser.id,
+        name: newUser.name,
+        role: newUser.role,
       },
-    };
-  }
+      token,
+    },
+  }; 
+}
 }
 
 module.exports = { registerService };

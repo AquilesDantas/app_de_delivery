@@ -33,7 +33,7 @@ const Register = () => {
     const passwordRegister = formRegister.password.value;
 
     try {
-      const response = await postRegister(nameRegister, emailRegister, passwordRegister);
+      const response = await postRegister(emailRegister, passwordRegister, nameRegister);
       const { token, user } = response.data;
       dispatch(setUser(user));
       dispatch(setToken(token));
@@ -57,7 +57,7 @@ const Register = () => {
               Nome
             </Form.Label>
             <Form.Control
-              data-testid=" common_register__input-name"
+              data-testid="common_register__input-name"
               id="input-name"
               placeholder="user name"
               name="name"

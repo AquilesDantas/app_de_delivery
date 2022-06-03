@@ -2,7 +2,6 @@ const { CustomError } = require('../Error/CustomErro');
 
 class RegisterMiddleware {
   static validate(req, res, next) {
-    console.log('sasddd');
     const { name, email, password } = req.body;
     const isNameValid = RegisterMiddleware.validateName(name);
     const isPasswordValid = RegisterMiddleware.validatePassword(password);

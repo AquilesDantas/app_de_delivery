@@ -7,8 +7,9 @@ export const postLogin = async (email, password) => axios.post(`${baseURL}/login
   password,
 });
 
-export const postRegister = async (email, password, name) => axios.post(`${baseURL}/register`, {
-  name,
-  email,
-  password,
-});
+export const postRegister = async (email, password, name) => axios
+  .post(`${baseURL}/register`, {
+    name,
+    email,
+    password,
+  });

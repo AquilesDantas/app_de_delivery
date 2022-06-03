@@ -4,10 +4,10 @@ const { CustomError } = require('../Error/CustomErro');
 class RegisterModel {
   static async create(obj) {
     try {
-      console.log(obj);
-      const newUser = await User.create(obj);
+      const newUser = await User.create(obj, { attributes: ['id', 'name', 'email', 'role'] });
       return newUser;   
     } catch (error) {
+      console.error(error);
       throw new CustomError('User already exist', 409);
     }
   }

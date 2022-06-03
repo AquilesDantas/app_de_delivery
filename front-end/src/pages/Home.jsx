@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { Form, Button, Row, Col, Alert } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { setUser, setToken } from '../slices/selections';
 import postLogin from '../API/Request';
 import logo from '../images/ZéBirita.jpeg';
 
@@ -11,6 +13,8 @@ const Home = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [nextPage, setNextPage] = useState(false);
+
+  const dispatch = useDispatch();
 
   const MAGIC_NUMBER = 6;
 
@@ -35,8 +39,9 @@ const Home = () => {
     const passwordLogin = formLogin.password.value;
     try {
       const response = await postLogin(emailLogin, passwordLogin);
-      // const { token, user } = response.data;
-      console.log(response);
+      const { token, user } = response.data;
+      dispatch(setUser(user));
+      dispatch(setToken(token));
       setHidden(true);
       setNextPage(true);
       formLogin.reset();

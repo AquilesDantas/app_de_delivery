@@ -1,23 +1,17 @@
 // const registerModel = require('../model/userModel');
 const { ServiceAuth } = require('./serviceAuth');
+const { RegisterModel } = require('../model/registerModel');
 
 class registerService {
   static async create(name, email, password) {
-    // const userdata = await UserModel.findOne(email);
-    // if (!userdata) {
-    //   return { code: 401, message: 'User not found' };
-    // }
-    // if (!ServiceAuth.authPassword(userdata.password, ServiceAuth.encrypt(password))) {
-    //   return { code: 401, message: 'invalid password' };
-    // }
+    const role = 'costumer';
     const encryptedPassword = ServiceAuth.encrypt(password);
+    const newUser = await RegisterModel.create({ name, email, password: encryptedPassword, role });
     return { code: 201,
       message: {
-        // id: userdata.id,
         name,
         email,
-        password: encryptedPassword,
-        role: 'costumer',
+        role: role,
       },
     };
   }

@@ -1,10 +1,16 @@
 const User = require('../../database/models/user');
+const { CustomError } = require('../Error/CustomErro');
 
-class registerModel {
+class RegisterModel {
   static async create(obj) {
-    const newUser = await User.create(obj);
-    return newUser;
+    try {
+      console.log(obj);
+      const newUser = await User.create(obj);
+      return newUser;   
+    } catch (error) {
+      throw new CustomError('User already exist', 409);
+    }
   }
 }
 
-module.exports = registerModel;
+module.exports = { RegisterModel };

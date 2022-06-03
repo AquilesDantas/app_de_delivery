@@ -2,6 +2,7 @@ const { CustomError } = require('../Error/CustomErro');
 
 class RegisterMiddleware {
   static validate(req, res, next) {
+    console.log('sasddd');
     const { name, email, password } = req.body;
     const isNameValid = RegisterMiddleware.validateName(name);
     const isPasswordValid = RegisterMiddleware.validatePassword(password);
@@ -14,7 +15,7 @@ class RegisterMiddleware {
   }
 
   static validateName(name) {
-    return name.length < 12;
+    return name && name.length >= 12;
   }
 
   static validatePassword(password) {

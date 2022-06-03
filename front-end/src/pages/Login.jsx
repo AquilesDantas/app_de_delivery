@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col, Alert } from 'react-bootstrap';
 import postLogin from '../API/Request';
 import logo from '../images/ZéBirita.jpeg';
 import './Login.css';
@@ -108,9 +108,12 @@ const Login = () => {
         </Button>
       </Link>
       {!hidden && (
-        <span data-testid="common_login__element-invalid-email">
-          {message}
-        </span>
+        <Alert variant="danger" onClose={ () => setHidden(true) } dismissible>
+          <Alert.Heading>Ops! Something wrong does not right...</Alert.Heading>
+          <span data-testid="common_login__element-invalid-email">
+            {message}
+          </span>
+        </Alert>
       )}
     </div>
   );

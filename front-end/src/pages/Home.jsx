@@ -3,7 +3,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { Form, Button, Row, Col, Alert } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { setUser, setToken } from '../slices/selections';
-import postLogin from '../API/Request';
+import { postLogin } from '../API/Request';
 import logo from '../images/ZéBirita.jpeg';
 
 const Home = () => {

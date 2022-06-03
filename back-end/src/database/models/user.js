@@ -53,7 +53,6 @@ const sequelize = new Sequelize(development);
 class User extends Model {}
 User.init(
   {
-    id: { type: DataTypes.INTEGER, primaryKey: true },
     name: DataTypes.STRING,
     email: { type: DataTypes.STRING, unique: true },
     password: DataTypes.STRING,

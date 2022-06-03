@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import postLogin from '../API/Request';
 import logo from '../images/ZéBirita.jpeg';
-import '../App.css';
+import './Login.css';
 
 const Login = () => {
   const [message, setMessage] = useState('');
@@ -47,13 +47,13 @@ const Login = () => {
 
   return (
     <div className="login">
-      <section className="logo-ze-birita">
-        <img className="logo" src={ logo } alt="logo zé birita" />
+      <section className="logo__ze-birita">
+        <img className="logo__ze-birita__img" src={ logo } alt="logo zé birita" />
       </section>
-      <Form ref={ form } onSubmit={ (e) => handleSubmit(e) }>
+      <Form ref={ form } onSubmit={ (e) => handleSubmit(e) } className="login__form">
         <Row className="align-items-center">
           <Col xs="auto">
-            <Form.Label htmlFor="input-email" visuallyHidden>
+            <Form.Label htmlFor="input-email" visuallyHidden className="form__label">
               email
             </Form.Label>
             <Form.Control
@@ -62,12 +62,13 @@ const Login = () => {
               placeholder="email@trybeer.com"
               name="email"
               type="email"
+              className="form__control"
               onChange={ ({ target }) => setEmail(target.value) }
               required
             />
           </Col>
           <Col xs="auto">
-            <Form.Label htmlFor="input-password" visuallyHidden>
+            <Form.Label htmlFor="input-password" visuallyHidden className="form__label">
               senha
             </Form.Label>
             <Form.Control
@@ -76,6 +77,7 @@ const Login = () => {
               name="password"
               type="password"
               placeholder="password"
+              className="form__control"
               onChange={ ({ target }) => setPassword(target.value) }
               required
             />
@@ -84,6 +86,9 @@ const Login = () => {
             <Button
               data-testid="common_login__button-login"
               type="submit"
+              variant="success"
+              size="lg"
+              className="form__button"
               disabled={ isDisable }
             >
               LOGIN
@@ -92,7 +97,13 @@ const Login = () => {
         </Row>
       </Form>
       <Link to="/register">
-        <Button data-testid="common_login__button-register" type="button">
+        <Button
+          data-testid="common_login__button-register"
+          type="button"
+          className="button__register"
+          variant="primary"
+          size="lg"
+        >
           Ainda não tenho conta
         </Button>
       </Link>

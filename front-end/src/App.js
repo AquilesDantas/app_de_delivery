@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Provider from './context/Provider';
 import Login from './pages/Login';
 import Register from './pages/Register';
-// import Home from './pages/Home';
+import Products from './pages/Products';
+import Home from './pages/Home';
 import './App.css';
 
 function App() {
@@ -11,15 +12,10 @@ function App() {
     <Provider>
       <BrowserRouter>
         <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <Login />
-            }
-          />
+          <Route path="/" element={ <Home /> } />
           <Route exact path="/login" element={ <Login /> } />
           <Route path="/register" element={ <Register /> } />
+          <Route path="/customer/products" element={ <Products /> } />
         </Routes>
       </BrowserRouter>
     </Provider>

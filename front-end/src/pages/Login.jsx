@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { Form, Button, Row, Col, Alert } from 'react-bootstrap';
 import postLogin from '../API/Request';
 import logo from '../images/ZéBirita.jpeg';
+
 import './Login.css';
 
 const Login = () => {
@@ -11,6 +12,7 @@ const Login = () => {
   const [isDisable, setIsDisable] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [nextPage, setNextPage] = useState(false);
 
   const MAGIC_NUMBER = 6;
 
@@ -38,6 +40,7 @@ const Login = () => {
       // const { token, user } = response.data;
       console.log(response);
       setHidden(true);
+      setNextPage(true);
       formLogin.reset();
     } catch (error) {
       setMessage(error.response.data);
@@ -115,6 +118,7 @@ const Login = () => {
           </span>
         </Alert>
       )}
+      {nextPage && (<Navigate from="/login" to="/customer/products" />)}
     </div>
   );
 };

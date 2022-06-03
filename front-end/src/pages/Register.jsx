@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Register = () => <p>Pagina de registro</p>;
+const Register = () => <p>VQV</p>;
 
 export default Register;

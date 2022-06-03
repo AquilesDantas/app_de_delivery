@@ -1,0 +1,73 @@
+.login {
+  align-items: center;
+  background: rgb(230, 22, 22);
+  background-image: url('../images/bg-texture.png');
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+}
+
+.logo__ze-birita {
+  display: flex;
+  height: 35%;
+  justify-content: center;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  width: 35%;
+}
+
+.logo__ze-birita__img {
+  border-radius: 47%;
+  display: flex;
+  min-width: 200px;
+  width: 60%;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  padding: 0.5rem;
+}
+
+.form__label {
+  padding: 0.8rem;
+}
+
+.form__control {
+  margin-bottom: 0.8rem;
+}
+
+.button__register, .form__button {
+  border-radius: 0.3rem;
+  padding: 0.2rem;
+}
+
+.form__button {
+  width: 50%;
+}
+
+.col-auto {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-close {
+  background: red;
+  padding: 0.5rem;
+  width: 1rem;
+}
+
+.fade {
+  align-items: center;
+  background-color: yellow;
+  border-radius: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  padding: 0.8rem;
+}
+
+.alert-heading {
+  width: 80%;
+}

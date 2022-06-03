@@ -13,7 +13,7 @@ class LoginMiddleware {
   }  
 
   static validatePassword(password) {
-    return password && password.length >= 5;
+    return password && password.length >= 6;
   }
 
   static validateEmail(email) {

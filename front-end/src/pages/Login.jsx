@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../images/ZéBirita.jpeg';
-import '../App.css';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import postLogin from '../API/Request';
+import logo from '../images/ZéBirita.jpeg';
+import './Login.css';
 
 const Login = () => {
   const [message, setMessage] = useState('');
@@ -10,6 +11,7 @@ const Login = () => {
   const [isDisable, setIsDisable] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const MAGIC_NUMBER = 6;
 
   const validatePassword = (pass) => pass && pass.length >= MAGIC_NUMBER;
@@ -44,55 +46,72 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <section>
-        <img className="logo" src={ logo } alt="logo zé birita" />
+    <div className="login">
+      <section className="logo__ze-birita">
+        <img className="logo__ze-birita__img" src={ logo } alt="logo zé birita" />
       </section>
-      <section>
-        <form ref={ form } onSubmit={ (e) => handleSubmit(e) }>
-          <label htmlFor="input-email">
-            Login
-            <input
+      <Form ref={ form } onSubmit={ (e) => handleSubmit(e) } className="login__form">
+        <Row className="align-items-center">
+          <Col xs="auto">
+            <Form.Label htmlFor="input-email" visuallyHidden className="form__label">
+              email
+            </Form.Label>
+            <Form.Control
               data-testid="common_login__input-email"
               id="input-email"
               placeholder="email@trybeer.com"
               name="email"
               type="email"
+              className="form__control"
               onChange={ ({ target }) => setEmail(target.value) }
               required
             />
-          </label>
-          <label htmlFor="input-password">
-            <input
+          </Col>
+          <Col xs="auto">
+            <Form.Label htmlFor="input-password" visuallyHidden className="form__label">
+              senha
+            </Form.Label>
+            <Form.Control
               id="input-password"
               data-testid="common_login__input-password"
               name="password"
               type="password"
               placeholder="password"
+              className="form__control"
               onChange={ ({ target }) => setPassword(target.value) }
               required
             />
-          </label>
-
-          <button
-            data-testid="common_login__button-login"
-            type="submit"
-            disabled={ isDisable }
-          >
-            LOGIN
-          </button>
-        </form>
-        <Link to="/register">
-          <button data-testid="common_login__button-register" type="button">
-            Ainda não tenho conta
-          </button>
-        </Link>
-        {!hidden && (
-          <span data-testid="common_login__element-invalid-email">
-            {message}
-          </span>
-        )}
-      </section>
+          </Col>
+          <Col xs="auto">
+            <Button
+              data-testid="common_login__button-login"
+              type="submit"
+              variant="success"
+              size="lg"
+              className="form__button"
+              disabled={ isDisable }
+            >
+              LOGIN
+            </Button>
+          </Col>
+        </Row>
+      </Form>
+      <Link to="/register">
+        <Button
+          data-testid="common_login__button-register"
+          type="button"
+          className="button__register"
+          variant="primary"
+          size="lg"
+        >
+          Ainda não tenho conta
+        </Button>
+      </Link>
+      {!hidden && (
+        <span data-testid="common_login__element-invalid-email">
+          {message}
+        </span>
+      )}
     </div>
   );
 };

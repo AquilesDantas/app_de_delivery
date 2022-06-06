@@ -11,7 +11,10 @@ class UserModel {
       const users = await User.findAll();
       return users;
     }
-    const users = await User.findAll({ where: { role } });
+    const users = await User.findAll({
+      where: { role },
+      attributes: { exclude: ['role', 'password', 'email'] },
+    });
     return users;
   }
 }

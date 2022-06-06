@@ -5,5 +5,6 @@ const CheckoutController = require('../controller/checkoutController');
 const router = Router();
 
 router.get('/sellers', CheckoutController.getSellers);
+router.post('/checkout', CheckoutController.createSale);
 
 module.exports = router;

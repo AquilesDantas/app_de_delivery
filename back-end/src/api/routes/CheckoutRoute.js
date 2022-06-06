@@ -1,10 +1,18 @@
 const { Router } = require('express');
 const CheckoutController = require('../controller/checkoutController');
-// const { ProductMiddleware } = require('../middleware/productMiddleware');
+const AuthMiddleware = require('../middleware/authMiddleware');
 
 const router = Router();
 
-router.get('/sellers', CheckoutController.getSellers);
-router.post('/checkout', CheckoutController.createSale);
+router.get(
+  '/sellers',
+  AuthMiddleware.auhtenticate,
+  CheckoutController.getSellers,
+);
+router.post(
+  '/costumer/checkout',
+  AuthMiddleware.auhtenticate,
+  CheckoutController.createSale,
+);
 
 module.exports = router;

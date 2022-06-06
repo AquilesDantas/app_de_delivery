@@ -1,14 +1,8 @@
 const CheckoutService = require('../service/checkoutService');
-const { ServiceAuth } = require('../service/serviceAuth');
 
 class CheckoutController {
   static async getSellers(req, res, next) {
     try {
-      const { authorization } = req.headers;
-
-      if (!ServiceAuth.tokenValidation(authorization)) {
-        return res.status(401).json('Unauthorized user'); 
-      }
       const sellers = await CheckoutService.getSellers();
       return res.status(200).json(sellers);
     } catch (error) {
@@ -18,16 +12,10 @@ class CheckoutController {
 
   static async createSale(req, res, next) {
     try {
-      const { authorization } = req.headers;
-
-      if (!ServiceAuth.tokenValidation(authorization)) {
-        return res.status(401).json('Unauthorized user'); 
-      }
       const saleInfo = req.body;
       const newSale = await CheckoutService.createSale(saleInfo);
       return res.status(200).json(newSale);
     } catch (error) {
-      console.log(error);
       return next(error);
     }
   }

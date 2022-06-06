@@ -63,6 +63,4 @@ Sale.belongsToMany(Product, {
   other: 'saleId',
 });
 
-console.log(SalesProducts.getAttributes());
-
 module.exports = SalesProducts;

@@ -13,3 +13,8 @@ export const postRegister = async (email, password, name) => axios
     email,
     password,
   });
+
+export const getProducts = async (token) => axios.get(`${baseURL}/customer/products`, {
+  headers: {
+    Authorization: token,
+  } });

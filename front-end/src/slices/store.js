@@ -3,7 +3,7 @@ import userReducer from './selections';
 
 const store = configureStore({
   reducer: {
-    user: userReducer,
+    data: userReducer,
   },
 });
 

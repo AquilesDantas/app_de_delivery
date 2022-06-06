@@ -1,6 +1,9 @@
+// const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const { sign } = require('jsonwebtoken');
-const { readFileSync } = require('fs');
+const jwt = require('jsonwebtoken');
+const fs = require('fs');
+// const { sign } = require('jsonwebtoken');
+// const { readFileSync } = require('fs');
 
 class ServiceAuth {
   static encrypt(password) {
@@ -12,14 +15,24 @@ class ServiceAuth {
   }
 
   static getToken(email) {
-    const token = sign(
+    const token = jwt.sign(
       {
         email,
       },
-      readFileSync('jwt.evaluation.key').toString(),
+      fs.readFileSync('jwt.evaluation.key').toString(),
       { algorithm: 'HS256' },
     );
     return token;
+  }
+
+  static tokenValidation(token) {
+    const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf-8');
+
+    if (token) {
+      const tokenCheck = jwt.verify(token, SECRET);
+      return tokenCheck;
+    }
+    return false;
   }
 }
 

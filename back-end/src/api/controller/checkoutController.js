@@ -23,8 +23,8 @@ class CheckoutController {
       if (!ServiceAuth.tokenValidation(authorization)) {
         return res.status(401).json('Unauthorized user'); 
       }
-      const sale = req.body;
-      const newSale = await CheckoutService.createSale(sale);
+      const saleInfo = req.body;
+      const newSale = await CheckoutService.createSale(saleInfo);
       return res.status(200).json(newSale);
     } catch (error) {
       console.log(error);

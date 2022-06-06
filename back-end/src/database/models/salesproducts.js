@@ -9,7 +9,7 @@
 //      * The `models/index` file will call this method automatically.
 //      */
 //     static associate(models) {
-//       // define association here 
+//       // define association here
 //     }
 //   }
 //   SalesProducts.init({
@@ -21,7 +21,7 @@
 //     underscored: true,
 //     timestamps: false,
 //     modelName: 'SalesProducts',
-//     tableName: "sales_products"
+//     tableName: 'sales_products'
 //   });
 //   return SalesProducts;
 // };
@@ -29,7 +29,8 @@
 const { DataTypes, Model } = require('sequelize');
 const { Sequelize } = require('sequelize');
 const { development } = require('../config/config');
-const User = require('./user');
+const Product = require('./product');
+const Sale = require('./sale');
 
 const sequelize = new Sequelize(development);
 
@@ -37,22 +38,31 @@ class SalesProducts extends Model {}
 
 SalesProducts.init(
   {
-    saleId: DataTypes.INTEGER,
-    productId: DataTypes.INTEGER,
-    quantity: DataTypes.INTEGER
+    quantity: DataTypes.INTEGER,
   },
   {
     sequelize,
     underscored: true,
     timestamps: false,
-    modelName: 'Sale',
-    tableName: 'sales',
+    modelName: 'SalesProducts',
+    tableName: 'sales_products',
   }
 );
 
-Sale.belongsTo(User, { foreignKey: 'id', as: 'userId' });
-Sale.belongsTo(User, { foreignKey: 'id', as: 'sellerId' });
-User.hasOne(Sale, { foreignKey: 'userId'});
-User.hasOne(Sale, { foreignKey: 'sellerId'});
+Product.belongsToMany(Sale, {
+  foreignKey: 'saleId',
+  as: 'sales',
+  through: SalesProducts,
+  other: 'productId',
+});
 
-module.exports = Sale;
+Sale.belongsToMany(Product, {
+  foreignKey: 'productId',
+  as: 'products',
+  through: SalesProducts,
+  other: 'saleId',
+});
+
+console.log(SalesProducts.getAttributes());
+
+module.exports = SalesProducts;

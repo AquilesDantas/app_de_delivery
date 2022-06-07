@@ -4,7 +4,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser, setToken } from '../slices/selections';
 import { postLogin } from '../API/Request';
-import logo from '../images/ZéBirita.jpeg';
+import logo from '../assets/ZéBirita.jpeg';
 
 import './Login.css';
 

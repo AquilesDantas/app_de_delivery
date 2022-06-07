@@ -4,6 +4,7 @@ const LoginRoute = require('./routes/LoginRoute');
 const RegisterRoute = require('./routes/RegisterRoute');
 const ProductsRoute = require('./routes/ProductsRoute');
 const CheckoutRoute = require('./routes/CheckoutRoute');
+const OrdersRoute = require('./routes/OrdersRoute');
 
 const { midErr } = require('./middleware/error');
 
@@ -16,6 +17,7 @@ app.use(LoginRoute);
 app.use(RegisterRoute);
 app.use(ProductsRoute);
 app.use(CheckoutRoute);
+app.use(OrdersRoute);
 
 app.use(midErr);
 

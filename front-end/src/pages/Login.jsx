@@ -42,6 +42,7 @@ const Login = () => {
     try {
       const response = await postLogin(emailLogin, passwordLogin);
       const { token, user } = response.data;
+      console.log('try', message);
       dispatch(setUser(user));
       dispatch(setToken(token));
       setHidden(true);
@@ -49,6 +50,7 @@ const Login = () => {
       formLogin.reset();
     } catch (error) {
       setMessage(error.response.data);
+      console.log(error);
       setHidden(false);
     }
   };

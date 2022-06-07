@@ -31,11 +31,29 @@ const NavBar = () => {
           <img className="logo__ze-birita" src={ LOGO_ZE } alt="logo zé birita" />
         </Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link onClick={ () => navigate('/customer/products') }>
+          <Nav.Link
+            onClick={ () => navigate('/customer/products') }
+            data-testid="customer_products__element-navbar-link-products"
+          >
             Produtos
           </Nav.Link>
-          <Nav.Item>{ name }</Nav.Item>
-          <Nav.Link onClick={ checkout }>sair</Nav.Link>
+          <Nav.Link
+            onClick={ () => navigate('/customer/products') }
+            data-testid="customer_products__element-navbar-link-orders"
+          >
+            Pedidos
+          </Nav.Link>
+          <Nav.Item
+            data-testid="customer_products__element-navbar-user-full-name"
+          >
+            { name }
+          </Nav.Item>
+          <Nav.Link
+            onClick={ checkout }
+            data-testid="customer_products__element-navbar-link-logout"
+          >
+            sair
+          </Nav.Link>
         </Nav>
       </Container>
     </Navbar>

@@ -36,13 +36,21 @@ const ProductsList = () => {
           <Col key={ product.id } sm="6" md="4" lg="3" xl="2">
             <Card>
               <Card.Img
+                data-testid={ `customer_products__img-card-bg-image-${product.id}` }
                 variant="top"
                 src={ product.urlImage }
                 style={ { maxWidth: '5rem' } }
               />
               <Card.Body>
-                <Card.Title>{product.name}</Card.Title>
-                <Card.Subtitle>
+                <Card.Title
+                  data-testid={ `customer_products__element-card-title-${product.id}` }
+                >
+                  {product.name}
+
+                </Card.Title>
+                <Card.Subtitle
+                  data-testid={ `customer_products__element-card-price-${product.id}` }
+                >
                   R$
                   {' '}
                   {product.price}

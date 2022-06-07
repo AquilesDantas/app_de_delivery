@@ -4,6 +4,6 @@ const { ProductController } = require('../controller/productsController');
 
 const router = Router();
 
-router.get('/costumer/products', ProductController.findAll);
+router.get('/customer/products', ProductController.findAll);
 
 module.exports = router;

@@ -1,45 +1,49 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Button } from 'react-bootstrap';
-import { getProducts } from '../API/Request';
-import './ProductsList.css';
+import { Card } from 'react-bootstrap';
+// import { getProducts } from '../API/Request';
 
 const ProductsList = () => {
   const token = useSelector(({ data }) => data.token.payload);
-  const [products, setProducts] = useState({});
+  const [products, setProducts] = useState([]);
+  const { data } = products;
+
+  const getProducts = async (auth) => {
+    const BASE_URL = 'http://localhost:3001';
+
+    try {
+      const cardProducts = axios.get(`${BASE_URL}/customer/products`, {
+        headers: {
+          Authorization: auth,
+        } });
+
+      setProducts(await cardProducts);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const ximira = async () => {
-      setProducts(await getProducts(token));
-    };
-    ximira();
+    getProducts(token);
   }, [token]);
 
-  const cards = (data) => (
-    <div className="card" key={ data.id }>
-      <section className="card-image">
-        <img src={ data.urlImage } alt={ data.name } />
-      </section>
-      <section className="data-container">
-        <h5>{data.name}</h5>
-        <h6>{data.price}</h6>
-        <Button>
-          +
-        </Button>
-        <Button>
-          -
-        </Button>
-      </section>
-    </div>
-  );
-
-  const cardList = () => products.data.map((product) => cards(product));
-  if (!products.data) {
-    return <p>Loading</p>;
-  }
   return (
-    <div className="container-card">
-      {cardList()}
+    <div className="cards__products">
+      {data && data.map((product) => (
+        <Card key={ product.id } style={ { width: '10rem' } }>
+          <Card.Img variant="top" src={ product.urlImage } />
+          <Card.Body>
+            <Card.Title>{product.name}</Card.Title>
+            <Card.Subtitle>
+              R$
+              {' '}
+              {product.price}
+            </Card.Subtitle>
+            {/* <Button variant="primary">Go somewhere</Button> */}
+          </Card.Body>
+        </Card>
+      ))}
     </div>
   );
 };

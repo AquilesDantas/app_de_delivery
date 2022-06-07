@@ -1,20 +1,44 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:3001';
+const BASE_URL = 'http://localhost:3001';
 
-export const postLogin = async (email, password) => axios.post(`${baseURL}/login`, {
-  email,
-  password,
-});
+export const postLogin = async (email, password) => {
+  try {
+    const user = axios.post(`${BASE_URL}/login`, {
+      email,
+      password,
+    });
 
-export const postRegister = async (email, password, name) => axios
-  .post(`${baseURL}/register`, {
-    name,
-    email,
-    password,
-  });
+    return (await user);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-export const getProducts = async (token) => axios.get(`${baseURL}/customer/products`, {
-  headers: {
-    Authorization: token,
-  } });
+export const postRegister = async (email, password, name) => {
+  try {
+    const newUser = axios
+      .post(`${BASE_URL}/register`, {
+        name,
+        email,
+        password,
+      });
+
+    return (await newUser);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// export const getProducts = async (token) => {
+//   try {
+//     const products = axios.get(`${BASE_URL}/customer/products`, {
+//       headers: {
+//         Authorization: token,
+//       } });
+
+//     return (await products);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };

@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import './index.css';
 import App from './App';
 import store from './slices/store'
 import {Provider} from 'react-redux'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
 
 
 ReactDOM.render(

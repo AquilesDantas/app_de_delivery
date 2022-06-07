@@ -1,7 +1,23 @@
 .navbar {
-  width: 100%;
+  margin: 0.2rem;
+  padding: 0.1rem;
 }
 
 .nav-item {
-  color: antiquewhite;
+  color: blanchedalmond;
+}
+
+.navbar-nav {
+  width: 100%;
+}
+
+.navbar-brand {
+  width: 10%;
+}
+
+.logo__ze-birita {
+  border-radius: 5rem;
+  display: flex;
+  min-width: 5px;
+  width: 75%;
 }

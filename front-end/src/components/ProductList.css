@@ -1,6 +1,7 @@
-.cards__products {
-  display: flex;
-  flex-flow: row wrap;
-  width: 90%;
+.card {
+  border-radius: 0 2rem;
+  box-shadow: 0 0.1rem 0.2rem;
+  margin-bottom: 0.2rem;
+  margin-top: 0.2rem;
 }
 

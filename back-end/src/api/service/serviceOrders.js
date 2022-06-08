@@ -1,14 +1,21 @@
 const { OrdersModel } = require('../model/ordersModel');
-// const UserModel = require('../model/userModel');
 
 class OrdersService {
-  static async findAll(id) {
-    const user = await OrdersModel.findAll(id);
-    return { 
+  static async findAll(userId) {
+    const allSalesId = await OrdersModel.findAll(userId);
+    return {
       code: 200,
-      message: user,
+      message: allSalesId,
   }; 
 }
+
+// static async findOne(userId, saleId) {
+//   const oneSale = await OrdersModel.findOne(userId, saleId);
+//   return {
+//     code: 200,
+//     message: oneSale,
+// }; 
+// }
 }
 
 module.exports = { OrdersService };

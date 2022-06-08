@@ -5,5 +5,6 @@ const AuthMiddleware = require('../middleware/authMiddleware');
 const router = Router();
 
 router.get('/customer/orders', AuthMiddleware.auhtenticate, OrdersController.findAll);
+router.get('/customer/orders/:id', AuthMiddleware.auhtenticate, OrdersController.findOne);
 
 module.exports = router;

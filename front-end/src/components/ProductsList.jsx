@@ -35,12 +35,15 @@ const ProductsList = () => {
         {data && data.map((product) => (
           <Col key={ product.id } sm="6" md="4" lg="3" xl="2">
             <Card>
-              <Card.Img
-                data-testid={ `customer_products__img-card-bg-image-${product.id}` }
-                variant="top"
-                src={ product.urlImage }
-                style={ { maxWidth: '5rem' } }
-              />
+              <section className="card_image">
+                <Card.Img
+                  data-testid={ `customer_products__img-card-bg-image-${product.id}` }
+                  variant="top"
+                  src={ product.urlImage }
+                  style={ { maxWidth: '163px',
+                    maxHeight: '163px' } }
+                />
+              </section>
               <Card.Body>
                 <Card.Title
                   data-testid={ `customer_products__element-card-title-${product.id}` }

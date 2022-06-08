@@ -1,5 +1,7 @@
+body {
+  margin: 0px;
+}
 .navbar {
-  margin: 0.2rem;
   padding: 0.1rem;
 }
 
@@ -7,7 +9,13 @@
   color: blanchedalmond;
 }
 
-.navbar-nav {
+.navbar-expand .navbar-nav  {
+  flex-direction: row;
+  display: flex;
+  flex-wrap: nowrap;
+  align-content: space-around;
+  justify-content: space-around;
+  align-items: baseline;
   width: 100%;
 }
 
@@ -20,4 +28,5 @@
   display: flex;
   min-width: 5px;
   width: 75%;
+  margin: 0px;
 }

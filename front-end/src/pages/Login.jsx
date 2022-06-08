@@ -41,7 +41,6 @@ const Login = () => {
     const passwordLogin = formLogin.password.value;
     try {
       const response = await postLogin(emailLogin, passwordLogin);
-      console.log(response);
       const { token, user } = response.data;
       dispatch(setUser(user));
       dispatch(setToken(token));
@@ -50,7 +49,7 @@ const Login = () => {
       formLogin.reset();
     } catch (error) {
       console.log('aqui');
-      console.log(error);
+      console.log(error.response.data);
       setMessage(error.response.data);
       setHidden(false);
     }

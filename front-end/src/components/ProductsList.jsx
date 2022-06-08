@@ -1,25 +1,29 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import './ProductList.css';
 // import { getProducts } from '../API/Request';
 
 const ProductsList = () => {
   const token = useSelector(({ data }) => data.token.payload);
   const [products, setProducts] = useState([]);
-  const { data } = products;
 
   const getProducts = async (auth) => {
     const BASE_URL = 'http://localhost:3001';
 
     try {
-      const cardProducts = axios.get(`${BASE_URL}/customer/products`, {
+      const cardProducts = await axios.get(`${BASE_URL}/customer/products`, {
         headers: {
           Authorization: auth,
         } });
+      console.log(cardProducts.data);
+      const productsQty = cardProducts.data.map((product) => {
+        product.quantity = 0;
+        return product;
+      });
 
-      setProducts(await cardProducts);
+      setProducts(productsQty);
     } catch (error) {
       console.log(error);
     }
@@ -29,10 +33,36 @@ const ProductsList = () => {
     getProducts(token);
   }, [token]);
 
+  const incQuant = (id) => {
+    const pro = [...products];
+
+    pro[id].quantity += 1;
+
+    setProducts(pro);
+  };
+
+  const decQuant = (id) => {
+    const pro = [...products];
+
+    if (pro[id].quantity !== 0) {
+      pro[id].quantity -= 1;
+    }
+
+    setProducts(pro);
+  };
+
+  const handleChange = (target, id) => {
+    const pro = [...products];
+
+    pro[id].quantity = +target.value;
+
+    setProducts(pro);
+  };
+
   return (
     <Container className="cards__products">
       <Row className="justify-content-sm-center">
-        {data && data.map((product) => (
+        {products && products.map((product) => (
           <Col key={ product.id } sm="6" md="4" lg="3" xl="2">
             <Card>
               <section className="card_image">
@@ -54,11 +84,27 @@ const ProductsList = () => {
                 <Card.Subtitle
                   data-testid={ `customer_products__element-card-price-${product.id}` }
                 >
-                  R$
-                  {' '}
                   {product.price}
                 </Card.Subtitle>
-                {/* <Button variant="primary">Go somewhere</Button> */}
+                <Button
+                  onClick={ () => { decQuant(product.id - 1); } }
+                  data-testid={ `customer_products__button-card-add-item-${product.id}` }
+                >
+                  -
+                </Button>
+                <input
+                  type="number"
+                  value={ product.quantity }
+                  onChange={ ({ target }) => handleChange(target, product.id - 1) }
+                  data-testid={ `customer_products__input-card-quantity-${product.id}` }
+                />
+                <Button
+                  onClick={ () => { incQuant(product.id - 1); } }
+                  data-testid={ `customer_products__button-card-rm-item-${product.id}` }
+
+                >
+                  +
+                </Button>
               </Card.Body>
             </Card>
           </Col>

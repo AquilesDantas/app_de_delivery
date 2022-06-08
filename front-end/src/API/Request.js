@@ -3,31 +3,23 @@ import axios from 'axios';
 const BASE_URL = 'http://localhost:3001';
 
 export const postLogin = async (email, password) => {
-  try {
-    const user = axios.post(`${BASE_URL}/login`, {
+  const user = await axios.post(`${BASE_URL}/login`, {
+    email,
+    password,
+  });
+
+  return user;
+};
+
+export const postRegister = async (email, password, name) => {
+  const newUser = await axios
+    .post(`${BASE_URL}/register`, {
+      name,
       email,
       password,
     });
 
-    return (await user);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const postRegister = async (email, password, name) => {
-  try {
-    const newUser = axios
-      .post(`${BASE_URL}/register`, {
-        name,
-        email,
-        password,
-      });
-
-    return (await newUser);
-  } catch (error) {
-    console.log(error);
-  }
+  return newUser;
 };
 
 // export const getProducts = async (token) => {

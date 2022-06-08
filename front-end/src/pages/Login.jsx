@@ -41,16 +41,17 @@ const Login = () => {
     const passwordLogin = formLogin.password.value;
     try {
       const response = await postLogin(emailLogin, passwordLogin);
+      console.log(response);
       const { token, user } = response.data;
-      console.log('try', message);
       dispatch(setUser(user));
       dispatch(setToken(token));
       setHidden(true);
       setNextPage(true);
       formLogin.reset();
     } catch (error) {
-      setMessage(error.response.data);
+      console.log('aqui');
       console.log(error);
+      setMessage(error.response.data);
       setHidden(false);
     }
   };

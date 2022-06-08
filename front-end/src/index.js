@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import store from './slices/store';
 
-const persistor = persistStore(store);
+let persistor = persistStore(store);
 
 ReactDOM.render(
   <React.StrictMode>

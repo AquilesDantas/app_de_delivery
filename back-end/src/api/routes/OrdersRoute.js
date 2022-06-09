@@ -20,4 +20,10 @@ router.get(
   OrdersController.findOrdersBySellerId,
 );
 
+router.patch(
+  '/orders/:id/update',
+  AuthMiddleware.authenticate,
+  OrdersController.updateSaleStatus,
+);
+
 module.exports = router;

@@ -43,6 +43,17 @@ class OrdersController {
       return next(error);
     }
   }
+
+  static async updateSaleStatus(req, res, next) {
+    try {
+      const { id } = req.params;
+      const { status } = req.body;
+      const { code, message } = await OrdersService.updateSaleStatus(id, status);
+      return res.status(code).json(message);
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
 
 module.exports = { OrdersController };

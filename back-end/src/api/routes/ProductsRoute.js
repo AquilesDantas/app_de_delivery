@@ -5,7 +5,7 @@ const AuthMiddleware = require('../middleware/authMiddleware');
 const router = Router();
 
 router.get(
-  '/costumer/products',
+  '/customer/products',
   AuthMiddleware.auhtenticate, 
   ProductController.findAll,
 );

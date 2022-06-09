@@ -7,12 +7,16 @@ const router = Router();
 router.get(
   '/customer/orders',
   AuthMiddleware.auhtenticate,
-  OrdersController.findAll,
+  OrdersController.findOrdersByUserId,
 );
 router.get(
   '/customer/orders/:id',
   AuthMiddleware.auhtenticate,
   OrdersController.findOneBySaleId,
 );
-
+router.get(
+  '/seller/orders',
+  AuthMiddleware.auhtenticate,
+  OrdersController.findOrdersBySellerId,
+);
 module.exports = router;

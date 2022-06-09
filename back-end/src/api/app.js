@@ -16,8 +16,8 @@ app.use(express.json());
 app.use(LoginRoute);
 app.use(RegisterRoute);
 app.use(ProductsRoute);
-app.use(CheckoutRoute);
 app.use(OrdersRoute);
+app.use(CheckoutRoute);
 
 app.use(midErr);
 

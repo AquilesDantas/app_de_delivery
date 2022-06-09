@@ -65,7 +65,7 @@ Sale.init(
 
 Sale.belongsTo(User, { foreignKey: 'id', as: 'userId' });
 Sale.belongsTo(User, { foreignKey: 'id', as: 'sellerId' });
-User.hasOne(Sale, { foreignKey: 'userId'});
-User.hasOne(Sale, { foreignKey: 'sellerId'});
+User.hasOne(Sale, { foreignKey: 'userId', as: 'xibil'});
+User.hasOne(Sale, { foreignKey: 'sellerId', as: 'ximira'});
 
 module.exports = Sale;

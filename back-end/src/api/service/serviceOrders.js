@@ -1,4 +1,4 @@
-const { OrdersModel } = require('../model/ordersModel');
+const { OrdersModel } = require("../model/ordersModel");
 
 class OrdersService {
   static async findAll(userId) {
@@ -6,16 +6,17 @@ class OrdersService {
     return {
       code: 200,
       message: allSalesId,
-  }; 
-}
+    };
+  }
 
-// static async findOne(userId, saleId) {
-//   const oneSale = await OrdersModel.findOne(userId, saleId);
-//   return {
-//     code: 200,
-//     message: oneSale,
-// }; 
-// }
+  static async findOneBySaleId(saleId) {
+    const sale = await OrdersModel.findOneBySaleId(saleId);
+
+    return {
+      code: 200,
+      message: sale,
+    };
+  }
 }
 
 module.exports = { OrdersService };

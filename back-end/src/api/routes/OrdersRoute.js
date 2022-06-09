@@ -6,17 +6,18 @@ const router = Router();
 
 router.get(
   '/customer/orders',
-  AuthMiddleware.auhtenticate,
+  AuthMiddleware.authenticate,
   OrdersController.findOrdersByUserId,
 );
 router.get(
-  '/customer/orders/:id',
-  AuthMiddleware.auhtenticate,
+  '/orders/:id',
+  AuthMiddleware.authenticate,
   OrdersController.findOneBySaleId,
 );
 router.get(
   '/seller/orders',
-  AuthMiddleware.auhtenticate,
+  AuthMiddleware.authenticate,
   OrdersController.findOrdersBySellerId,
 );
+
 module.exports = router;

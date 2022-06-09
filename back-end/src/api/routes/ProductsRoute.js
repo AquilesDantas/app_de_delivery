@@ -6,7 +6,7 @@ const router = Router();
 
 router.get(
   '/customer/products',
-  AuthMiddleware.auhtenticate, 
+  AuthMiddleware.authenticate, 
   ProductController.findAll,
 );
 

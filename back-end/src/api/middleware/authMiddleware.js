@@ -2,7 +2,7 @@ const { CustomError } = require('../Error/CustomErro');
 const { ServiceAuth } = require('../service/serviceAuth');
 
 class AuthMiddleware {
-  static auhtenticate(req, res, next) {
+  static authenticate(req, res, next) {
     const { authorization } = req.headers;
     try {
       if (!ServiceAuth.tokenValidation(authorization)) {

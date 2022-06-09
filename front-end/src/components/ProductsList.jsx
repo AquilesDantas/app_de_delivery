@@ -61,8 +61,10 @@ const ProductsList = () => {
         if (shopC[i].id !== (id + 1)) {
           console.log('ddddddddddd');
           attShop.push(pro[id]);
+          break;
         } else {
-          attShop.push(pro[id]);
+          attShop[i].quantity = pro[id].quantity;
+          break;
         }
       }
     } else {

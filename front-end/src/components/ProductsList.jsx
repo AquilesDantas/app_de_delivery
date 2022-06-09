@@ -84,7 +84,8 @@ const ProductsList = () => {
                 <Card.Subtitle
                   data-testid={ `customer_products__element-card-price-${product.id}` }
                 >
-                  {product.price}
+                  {product.price.replace(/\./, ',') }
+
                 </Card.Subtitle>
                 <Button
                   onClick={ () => { decQuant(product.id - 1); } }

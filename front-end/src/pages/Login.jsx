@@ -34,6 +34,17 @@ const Login = () => {
 
   const form = useRef();
 
+  const setStorage = (name, role, token) => {
+    const user = {
+      name,
+      email,
+      role,
+      token,
+    };
+
+    localStorage.setItem('user', JSON.stringify(user));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formLogin = e.target;
@@ -44,12 +55,14 @@ const Login = () => {
       const { token, user } = response.data;
       dispatch(setUser(user));
       dispatch(setToken(token));
+      setStorage(user.name, user.role, token);
       setHidden(true);
       setNextPage(true);
       formLogin.reset();
     } catch (error) {
       console.log('aqui');
-      console.log(error.response.data);
+      console.log(error);
+      // console.log(error.response.data);
       setMessage(error.response.data);
       setHidden(false);
     }

@@ -1,8 +1,8 @@
-const { OrdersService } = require("../service/serviceOrders");
-const { ServiceAuth } = require("../service/serviceAuth");
+const { OrdersService } = require('../service/serviceOrders');
+const { ServiceAuth } = require('../service/serviceAuth'); 
 
 class OrdersController {
-  static async findAll(req, res, _next) {
+  static async findAll(req, res, next) {
     try {
       const { authorization } = req.headers;
       const { id } = ServiceAuth.decodedToken(authorization);
@@ -21,7 +21,7 @@ class OrdersController {
       const { id: saleId } = req.params;
 
       const { code, message: sale } = await OrdersService.findOneBySaleId(
-        saleId
+        saleId,
       );
 
       return res.status(code).json(sale);

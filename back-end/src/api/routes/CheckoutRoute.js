@@ -10,7 +10,7 @@ router.get(
   CheckoutController.getSellers,
 );
 router.post(
-  '/costumer/checkout',
+  '/customer/checkout',
   AuthMiddleware.auhtenticate,
   CheckoutController.createSale,
 );

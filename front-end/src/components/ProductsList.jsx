@@ -38,14 +38,11 @@ const ProductsList = () => {
     const pro = [...products];
     const shopC = [...shopCard];
 
-    let attShop = [];
-
-    console.log(id);
+    let attShop = [...shopC];
 
     pro[id].quantity += 1;
 
     if (shopC.length !== 0) {
-      console.log('aquiiiii');
       // attShop = shopC.map((product) => {
       //   console.log(id + 1);
       //   console.log('--------------');
@@ -59,17 +56,17 @@ const ProductsList = () => {
       // });
 
       for (let i = 0; shopC.length > i; i += 1) {
+        console.log(shopC[i].id);
+        console.log(id);
         if (shopC[i].id !== (id + 1)) {
           console.log('ddddddddddd');
           attShop.push(pro[id]);
         } else {
-          shopC[i].quantity = pro[id].quantity;
+          attShop.push(pro[id]);
         }
       }
     } else {
-      (
-        attShop.push(pro[id])
-      );
+      attShop.push(pro[id]);
     }
 
     setShopCard(attShop);

@@ -8,6 +8,7 @@ import './ProductList.css';
 const ProductsList = () => {
   const token = useSelector(({ data }) => data.token.payload);
   const [products, setProducts] = useState([]);
+  const [shopCard, setShopCard] = useState([]);
 
   const getProducts = async (auth) => {
     const BASE_URL = 'http://localhost:3001';
@@ -35,8 +36,43 @@ const ProductsList = () => {
 
   const incQuant = (id) => {
     const pro = [...products];
+    const shopC = [...shopCard];
+
+    let attShop = [];
+
+    console.log(id);
 
     pro[id].quantity += 1;
+
+    if (shopC.length !== 0) {
+      console.log('aquiiiii');
+      // attShop = shopC.map((product) => {
+      //   console.log(id + 1);
+      //   console.log('--------------');
+      //   console.log(product.id);
+      //   if (product.id !== (id + 1)) {
+      //     console.log('nao');
+      //     return pro[id];
+      //   }
+      //   product.quantity = pro[id].quantity;
+      //   return product;
+      // });
+
+      for (let i = 0; shopC.length > i; i += 1) {
+        if (shopC[i].id !== (id + 1)) {
+          console.log('ddddddddddd');
+          attShop.push(pro[id]);
+        } else {
+          shopC[i].quantity = pro[id].quantity;
+        }
+      }
+    } else {
+      (
+        attShop.push(pro[id])
+      );
+    }
+
+    setShopCard(attShop);
 
     setProducts(pro);
   };

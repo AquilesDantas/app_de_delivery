@@ -1,7 +1,5 @@
-const Product = require("../../database/models/product");
-const Sale = require("../../database/models/sale");
-const User = require("../../database/models/user");
-const { CustomError } = require("../Error/CustomErro");
+const Sale = require('../../database/models/sale');
+const { CustomError } = require('../Error/CustomErro');
 
 class OrdersModel {
   static async findAll(userId) {
@@ -9,7 +7,7 @@ class OrdersModel {
       const allSalesId = await Sale.findAll({ where: { userId } });
       return allSalesId;
     } catch (error) {
-      throw new CustomError("Not Found", 404);
+      throw new CustomError('Not Found', 404);
     }
   }
 
@@ -18,18 +16,22 @@ class OrdersModel {
       where: {
         id: saleId,
       },
-      include: [
-        {
-          model: User, as: 'ximira',
-        },
-        {
-          model: Product, as: 'products',
-          through: { attributes: [] }
-        },
-      ],
+      include: { all: true },
+      // exclude: ['userId', 'sellerId', 'user'],
+      // include: [
+      //   {
+      //     model: User, as: 'seller',
+      //   },
+      //   {
+      //     model: Product,
+      //     as: 'products',
+      //     through: { attributes: [] },
+      //     include: {},
+      //   },
+      // ],
     });
 
-    if (!order) throw new CustomError("Not found", 404);
+    if (!order) throw new CustomError('Not found', 404);
 
     return order;
   }

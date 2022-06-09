@@ -46,8 +46,8 @@ class Sale extends Model {
 
 Sale.init(
   {
-    // userId: DataTypes.INTEGER,
-    // sellerId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
+    sellerId: DataTypes.INTEGER,
     totalPrice: DataTypes.DECIMAL(9,2),
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.STRING,
@@ -63,9 +63,9 @@ Sale.init(
   }
 );
 
-Sale.belongsTo(User, { foreignKey: 'id', as: 'userId' });
-Sale.belongsTo(User, { foreignKey: 'id', as: 'sellerId' });
-User.hasOne(Sale, { foreignKey: 'userId', as: 'xibil'});
-User.hasOne(Sale, { foreignKey: 'sellerId', as: 'ximira'});
+Sale.belongsTo(User, { foreignKey: 'id', as: 'user' });
+Sale.belongsTo(User, { foreignKey: 'id', as: 'seller' });
+User.hasOne(Sale, { foreignKey: 'userId'});
+User.hasOne(Sale, { foreignKey: 'sellerId'});
 
 module.exports = Sale;

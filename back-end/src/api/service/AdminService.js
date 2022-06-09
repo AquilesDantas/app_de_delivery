@@ -4,7 +4,7 @@ const { ServiceAuth } = require('./serviceAuth');
 
 class AdminService {
   static async listAllUsers() {
-    const users = await UserModel.findAll();
+    const users = await UserModel.findAllCustomersAndSellers();
     return { code: 200, message: users };
   }
 

@@ -40,10 +40,17 @@ const ProductsList = () => {
     const arrayResult = [];
     if (array !== undefined) {
       array.map((obj) => arrayResult.push(obj.price * obj.quantity));
+<<<<<<< HEAD
       const arraySum = arrayResult.reduce((soma, i) => soma + i);
       console.log(arraySum);
       setTotalSales(arraySum.toFixed(2));
       return arraySum;
+=======
+      const somaArray = arrayResult.reduce((soma, i) => soma + i);
+      console.log(somaArray);
+      setTotalSales(somaArray);
+      return somaArray;
+>>>>>>> 58cfc6fb0631145fdb46ca8174a443bd63aea2cf
     }
   };
 

@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
+import { setCard } from '../slices/selections';
 import './ProductList.css';
 // import { getProducts } from '../API/Request';
 
@@ -30,6 +30,19 @@ const ProductsList = () => {
       console.log(error);
     }
   };
+  const dispatch = useDispatch();
+
+  const setCard = () => {
+    const produ = [...products];
+    const attProducts = produ.filter((product)=> {
+      if (product.quantity !== 0) {
+        return product
+      }
+    });
+
+    setShopCard(attProducts);
+    dispatch(setCard(attProducts));
+  };
 
   const totalPrice = (array) => {
     const arrayResult = [];
@@ -50,54 +63,16 @@ const ProductsList = () => {
     getProducts(token);
   }, [token]);
 
+  useEffect(() => {
+    setCard();
+  }, [products]);
+
   const incQuant = (id) => {
     const pro = [...products];
-    const shopC = [...shopCard];
-    const attShop = [...shopC];
-
-    let igual = 0;
-    let diferente = 0;
-    let inter = 0;
     pro[id].quantity += 1;
-
-    if (shopC.length !== 0) {
-      // attShop = shopC.map((product) => {
-      //   console.log(id + 1);
-      //   console.log('--------------');
-      //   console.log(product.id);
-      //   if (product.id !== (id + 1)) {
-      //     console.log('nao');
-      //     return pro[id];
-      //   }
-      //   product.quantity = pro[id].quantity;
-      //   return product;
-      // });
-
-      for (let i = 0; shopC.length > i; i += 1) {
-        if (shopC[i].id !== (id + 1)) {
-          diferente += 1;
-        } else {
-          igual += 1;
-          inter = i;
-        }
-      }
-
-      if (diferente === shopC.length) {
-        attShop.push(pro[id]);
-      }
-
-      if (igual === 1) {
-        shopC[inter].quantity = pro[id].quantity;
-      }
-    } else {
-      attShop.push(pro[id]);
-    }
-
-    setShopCard(attShop);
 
     setProducts(pro);
 
-    totalPrice(attShop);
   };
 
   const decQuant = (id) => {

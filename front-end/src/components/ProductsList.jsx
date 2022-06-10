@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
-import { setCard } from '../slices/selections';
 import './ProductList.css';
+// import { setCard } from '../slices/selections';
 // import { getProducts } from '../API/Request';
 
 const ProductsList = () => {
@@ -32,17 +33,17 @@ const ProductsList = () => {
   };
   const dispatch = useDispatch();
 
-  const setCard = () => {
+  const setCard = useCallback(() => {
     const produ = [...products];
-    const attProducts = produ.filter((product)=> {
+    const attProducts = produ.filter((product) => {
       if (product.quantity !== 0) {
-        return product
+        return product;
       }
     });
 
     setShopCard(attProducts);
-    dispatch(setCard(attProducts));
-  };
+    dispatch(setCard());
+  });
 
   const totalPrice = (array) => {
     const arrayResult = [];
@@ -65,14 +66,13 @@ const ProductsList = () => {
 
   useEffect(() => {
     setCard();
-  }, [products]);
+  }, [products, setCard]);
 
   const incQuant = (id) => {
     const pro = [...products];
     pro[id].quantity += 1;
 
     setProducts(pro);
-
   };
 
   const decQuant = (id) => {
@@ -148,10 +148,10 @@ const ProductsList = () => {
       </Row>
       <Link to="/checkout">
         <Button
-          data-testid="common_login__button-register"
+          data-testid=""
           type="button"
-          className="button__register"
-          variant="primary"
+          className=""
+          variant=""
           size="lg"
         >
           Ver carrinho:

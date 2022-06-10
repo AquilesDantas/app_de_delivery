@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import './ProductList.css';
@@ -9,6 +10,7 @@ const ProductsList = () => {
   const token = useSelector(({ data }) => data.token.payload);
   const [products, setProducts] = useState([]);
   const [shopCard, setShopCard] = useState([]);
+  const [totalSales, setTotalSales] = useState(0);
 
   const getProducts = async (auth) => {
     const BASE_URL = 'http://localhost:3001';
@@ -18,7 +20,6 @@ const ProductsList = () => {
         headers: {
           Authorization: auth,
         } });
-      console.log(cardProducts.data);
       const productsQty = cardProducts.data.map((product) => {
         product.quantity = 0;
         return product;
@@ -30,6 +31,21 @@ const ProductsList = () => {
     }
   };
 
+  const totalPrice = (array) => {
+    const arrayResult = [];
+    if (array !== undefined) {
+      array.map((obj) => arrayResult.push(obj.price * obj.quantity));
+
+      const somaArray = arrayResult.reduce((soma, i) => soma + i);
+
+      console.log(somaArray);
+
+      setTotalSales(somaArray);
+
+      return somaArray;
+    }
+  };
+
   useEffect(() => {
     getProducts(token);
   }, [token]);
@@ -37,15 +53,14 @@ const ProductsList = () => {
   const incQuant = (id) => {
     const pro = [...products];
     const shopC = [...shopCard];
+    const attShop = [...shopC];
 
-    // let attShop = [];
-
-    console.log(id);
-
+    let igual = 0;
+    let diferente = 0;
+    let inter = 0;
     pro[id].quantity += 1;
 
     if (shopC.length !== 0) {
-      console.log('aquiiiii');
       // attShop = shopC.map((product) => {
       //   console.log(id + 1);
       //   console.log('--------------');
@@ -60,21 +75,29 @@ const ProductsList = () => {
 
       for (let i = 0; shopC.length > i; i += 1) {
         if (shopC[i].id !== (id + 1)) {
-          console.log('ddddddddddd');
-          attShop.push(pro[id]);
+          diferente += 1;
         } else {
-          shopC[i].quantity = pro[id].quantity;
+          igual += 1;
+          inter = i;
         }
       }
+
+      if (diferente === shopC.length) {
+        attShop.push(pro[id]);
+      }
+
+      if (igual === 1) {
+        shopC[inter].quantity = pro[id].quantity;
+      }
     } else {
-      (
-        attShop.push(pro[id])
-      );
+      attShop.push(pro[id]);
     }
 
     setShopCard(attShop);
 
     setProducts(pro);
+
+    totalPrice(attShop);
   };
 
   const decQuant = (id) => {
@@ -148,6 +171,20 @@ const ProductsList = () => {
 
         ))}
       </Row>
+      <Link to="/checkout">
+        <Button
+          data-testid="common_login__button-register"
+          type="button"
+          className="button__register"
+          variant="primary"
+          size="lg"
+        >
+          Ver carrinho:
+          R$
+          {' '}
+          {totalSales}
+        </Button>
+      </Link>
     </Container>
   );
 };

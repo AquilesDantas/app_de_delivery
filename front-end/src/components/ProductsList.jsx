@@ -54,6 +54,7 @@ const ProductsList = () => {
 
     setShopCard(attShop);
     totalPrice(attShop);
+    console.log(shopCard);
   };
 
   const incQuant = (id) => {

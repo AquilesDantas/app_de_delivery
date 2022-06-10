@@ -38,7 +38,7 @@ const ProductsList = () => {
     const pro = [...products];
     const shopC = [...shopCard];
 
-    let attShop = [];
+    // let attShop = [];
 
     console.log(id);
 

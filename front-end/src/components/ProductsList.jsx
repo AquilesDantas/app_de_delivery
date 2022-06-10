@@ -1,15 +1,16 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
-import { setCard } from '../slices/selections';
+// import { setCard } from '../slices/selections';
 import './ProductList.css';
-// import { getProducts } from '../API/Request';
 
 const ProductsList = () => {
   const token = useSelector(({ data }) => data.token.payload);
   const [products, setProducts] = useState([]);
   const [shopCard, setShopCard] = useState([]);
+  const [totalSales, setTotalSales] = useState(0);
 
   const getProducts = async (auth) => {
     const BASE_URL = 'http://localhost:3001';
@@ -30,38 +31,36 @@ const ProductsList = () => {
       console.log(error);
     }
   };
-  const dispatch = useDispatch();
-
-  const setCard = () => {
-    const produ = [...products];
-    const attProducts = produ.filter((product)=> {
-      if (product.quantity !== 0) {
-        return product
-      }
-     } );
-
-    setShopCard(attProducts);
-    dispatch(setCard(attProducts));
-  }
-
 
   useEffect(() => {
     getProducts(token);
   }, [token]);
 
-  useEffect(()=> {
-    setCard()
-  }, [products])
+  const totalPrice = (array) => {
+    const arrayResult = [];
+    if (array !== undefined) {
+      array.map((obj) => arrayResult.push(obj.price * obj.quantity));
+      const somaArray = arrayResult.reduce((soma, i) => soma + i);
+      console.log(somaArray);
+      setTotalSales(somaArray);
+      return somaArray;
+    }
+  };
+
+  const card = () => {
+    const pro = [...products];
+
+    const attShop = pro.filter((product) => product.quantity !== 0);
+
+    setShopCard(attShop);
+    totalPrice(attShop);
+  };
 
   const incQuant = (id) => {
     const pro = [...products];
-   
     pro[id].quantity += 1;
-
-   
-
     setProducts(pro);
-
+    card();
   };
 
   const decQuant = (id) => {
@@ -72,6 +71,7 @@ const ProductsList = () => {
     }
 
     setProducts(pro);
+    card();
   };
 
   const handleChange = (target, id) => {
@@ -80,6 +80,7 @@ const ProductsList = () => {
     pro[id].quantity = +target.value;
 
     setProducts(pro);
+    card();
   };
 
   return (
@@ -135,6 +136,20 @@ const ProductsList = () => {
 
         ))}
       </Row>
+      <Link to="/checkout">
+        <Button
+          data-testid=""
+          type="button"
+          className=""
+          variant=""
+          size="lg"
+        >
+          Ver carrinho:
+          R$
+          {' '}
+          {totalSales}
+        </Button>
+      </Link>
     </Container>
   );
 };

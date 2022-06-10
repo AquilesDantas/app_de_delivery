@@ -1,11 +1,10 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
-import './ProductList.css';
 // import { setCard } from '../slices/selections';
-// import { getProducts } from '../API/Request';
+import './ProductList.css';
 
 const ProductsList = () => {
   const token = useSelector(({ data }) => data.token.payload);
@@ -21,6 +20,7 @@ const ProductsList = () => {
         headers: {
           Authorization: auth,
         } });
+
       const productsQty = cardProducts.data.map((product) => {
         product.quantity = 0;
         return product;
@@ -31,48 +31,36 @@ const ProductsList = () => {
       console.log(error);
     }
   };
-  const dispatch = useDispatch();
-
-  const setCard = useCallback(() => {
-    const produ = [...products];
-    const attProducts = produ.filter((product) => {
-      if (product.quantity !== 0) {
-        return product;
-      }
-    });
-
-    setShopCard(attProducts);
-    dispatch(setCard());
-  });
-
-  const totalPrice = (array) => {
-    const arrayResult = [];
-    if (array !== undefined) {
-      array.map((obj) => arrayResult.push(obj.price * obj.quantity));
-
-      const somaArray = arrayResult.reduce((soma, i) => soma + i);
-
-      console.log(somaArray);
-
-      setTotalSales(somaArray);
-
-      return somaArray;
-    }
-  };
 
   useEffect(() => {
     getProducts(token);
   }, [token]);
 
-  useEffect(() => {
-    setCard();
-  }, [products, setCard]);
+  const totalPrice = (array) => {
+    const arrayResult = [];
+    if (array !== undefined) {
+      array.map((obj) => arrayResult.push(obj.price * obj.quantity));
+      const arraySum = arrayResult.reduce((soma, i) => soma + i);
+      console.log(arraySum);
+      setTotalSales(arraySum.toFixed(2));
+      return arraySum;
+    }
+  };
+
+  const card = () => {
+    const pro = [...products];
+
+    const attShop = pro.filter((product) => product.quantity !== 0);
+
+    setShopCard(attShop);
+    totalPrice(attShop);
+  };
 
   const incQuant = (id) => {
     const pro = [...products];
     pro[id].quantity += 1;
-
     setProducts(pro);
+    card();
   };
 
   const decQuant = (id) => {
@@ -83,6 +71,7 @@ const ProductsList = () => {
     }
 
     setProducts(pro);
+    card();
   };
 
   const handleChange = (target, id) => {
@@ -91,6 +80,7 @@ const ProductsList = () => {
     pro[id].quantity = +target.value;
 
     setProducts(pro);
+    card();
   };
 
   return (
@@ -146,17 +136,14 @@ const ProductsList = () => {
 
         ))}
       </Row>
-      <Link to="/checkout">
+      <Link to="/customer/checkout">
         <Button
-          data-testid=""
+          data-testid="customer_products__checkout-bottom-value"
           type="button"
-          className=""
+          className="btn btn-primary"
           variant=""
           size="lg"
         >
-          Ver carrinho:
-          R$
-          {' '}
           {totalSales}
         </Button>
       </Link>

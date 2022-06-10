@@ -60,9 +60,7 @@ const Login = () => {
       setNextPage(true);
       formLogin.reset();
     } catch (error) {
-      console.log('aqui');
       console.log(error);
-      // console.log(error.response.data);
       setMessage(error.response.data);
       setHidden(false);
     }

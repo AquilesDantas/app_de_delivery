@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 // import { setCard } from '../slices/selections';
@@ -11,6 +11,8 @@ const ProductsList = () => {
   const [products, setProducts] = useState([]);
   const [shopCard, setShopCard] = useState([]);
   const [totalSales, setTotalSales] = useState(0);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const navigate = useNavigate();
 
   const getProducts = async (auth) => {
     const BASE_URL = 'http://localhost:3001';
@@ -38,11 +40,17 @@ const ProductsList = () => {
 
   const totalPrice = (array) => {
     const arrayResult = [];
+    let arraySum = 0;
+
     if (array !== undefined) {
       array.map((obj) => arrayResult.push(obj.price * obj.quantity));
-      const arraySum = arrayResult.reduce((soma, i) => soma + i);
-      console.log(arraySum);
-      setTotalSales(arraySum.toFixed(2));
+      if (Object.keys(arrayResult).length !== 0) {
+        arraySum = arrayResult.reduce((soma, i) => soma + i);
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+      setTotalSales(arraySum.toFixed(2).replace(/\./, ','));
       return arraySum;
     }
   };
@@ -137,17 +145,17 @@ const ProductsList = () => {
 
         ))}
       </Row>
-      <Link to="/customer/checkout">
-        <Button
-          data-testid="customer_products__checkout-bottom-value"
-          type="button"
-          className="btn btn-primary"
-          variant=""
-          size="lg"
-        >
-          {totalSales}
-        </Button>
-      </Link>
+      <Button
+        data-testid="customer_products__button-cart"
+        type="button"
+        className="btn btn-primary"
+        variant=""
+        size="lg"
+        onClick={ () => navigate('/customer/checkout') }
+        disabled={ isDisabled }
+      >
+        {totalSales}
+      </Button>
     </Container>
   );
 };

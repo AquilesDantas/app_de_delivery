@@ -10,6 +10,7 @@ export const userSlice = createSlice(
         role: '',
       },
       token: '',
+      card: [],
     },
     reducers: {
       setUser: (state, action) => {
@@ -18,9 +19,12 @@ export const userSlice = createSlice(
       setToken: (state, action) => {
         state.token = action;
       },
+      setCard: (state, action) => {
+        state.card = action;
+      },
     },
   },
 );
 
-export const { setUser, setToken } = userSlice.actions;
+export const { setUser, setToken, setCard } = userSlice.actions;
 export default userSlice.reducer;

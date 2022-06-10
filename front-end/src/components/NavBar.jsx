@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser, setToken } from '../slices/selections';
-import LOGO_ZE from '../assets/ZéBirita.jpeg';
+import TagP from '../assets/tagP.png';
 import './NavBar.css';
 
 const NavBar = () => {
@@ -21,6 +21,7 @@ const NavBar = () => {
   const checkout = () => {
     dispatch(setUser(initialState));
     dispatch(setToken(null));
+    localStorage.clear();
     navigate('/login');
   };
 
@@ -28,7 +29,7 @@ const NavBar = () => {
     <Navbar bg="dark" variant="dark">
       <Container className="justify-content-sm-center">
         <Navbar.Brand href="#home">
-          <img className="logo__ze-birita" src={ LOGO_ZE } alt="logo zé birita" />
+          <img className="logo__ze-birita" src={ TagP } alt="logo zé birita" />
         </Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link

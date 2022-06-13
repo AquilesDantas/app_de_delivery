@@ -10,7 +10,7 @@ class LoginService {
     if (!ServiceAuth.authPassword(userdata.password, ServiceAuth.encrypt(password))) {
       return { code: 401, message: 'invalid password' };
     }
-    const token = ServiceAuth.getToken(email);
+    const token = ServiceAuth.getToken(userdata.id, email);
     return { code: 200,
       message: { user: {
         id: userdata.id,

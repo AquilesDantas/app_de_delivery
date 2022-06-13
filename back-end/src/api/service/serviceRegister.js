@@ -7,7 +7,7 @@ class registerService {
     const role = 'costumer';
     const encryptedPassword = ServiceAuth.encrypt(password);
     const newUser = await RegisterModel.create({ name, email, password: encryptedPassword, role });
-    const token = ServiceAuth.getToken(email);
+    const token = ServiceAuth.getToken(newUser.id, email);
     return { code: 201,
       message: { user: {
         id: newUser.id,

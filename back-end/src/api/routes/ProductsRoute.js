@@ -1,9 +1,13 @@
 const { Router } = require('express');
 const { ProductController } = require('../controller/productsController');
-// const { ProductMiddleware } = require('../middleware/productMiddleware');
+const AuthMiddleware = require('../middleware/authMiddleware');
 
 const router = Router();
 
-router.get('/customer/products', ProductController.findAll);
+router.get(
+  '/customer/products',
+  AuthMiddleware.auhtenticate, 
+  ProductController.findAll,
+);
 
 module.exports = router;

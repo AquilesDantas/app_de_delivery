@@ -27,7 +27,7 @@ module.exports = {
       },
       deliveryAddress: {
         allowNull: false,
-        filed: 'delivery_address',
+        field: 'delivery_address',
         type: Sequelize.STRING
       },
       deliveryNumber: {

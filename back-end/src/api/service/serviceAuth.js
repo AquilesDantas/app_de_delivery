@@ -1,9 +1,6 @@
-// const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
-// const { sign } = require('jsonwebtoken');
-// const { readFileSync } = require('fs');
 
 class ServiceAuth {
   static encrypt(password) {
@@ -14,9 +11,10 @@ class ServiceAuth {
     return password === encryptPass;
   }
 
-  static getToken(email) {
+  static getToken(id, email) {
     const token = jwt.sign(
       {
+        id,
         email,
       },
       fs.readFileSync('jwt.evaluation.key').toString(),
@@ -33,6 +31,14 @@ class ServiceAuth {
       return tokenCheck;
     }
     return false;
+  }
+
+  static decodedToken(token) {
+    try {
+      return jwt.decode(token);
+    } catch (error) {
+      return null;
+    }
   }
 }
 

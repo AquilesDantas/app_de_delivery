@@ -154,7 +154,11 @@ const ProductsList = () => {
         onClick={ () => navigate('/customer/checkout') }
         disabled={ isDisabled }
       >
-        {totalSales}
+        R$
+        {' '}
+        <span data-testid="customer_products__checkout-bottom-value">
+          {totalSales}
+        </span>
       </Button>
     </Container>
   );

@@ -122,7 +122,7 @@ const ProductsList = () => {
                 </Card.Subtitle>
                 <Button
                   onClick={ () => { decQuant(product.id - 1); } }
-                  data-testid={ `customer_products__button-card-add-item-${product.id}` }
+                  data-testid={ `customer_products__button-card-rm-item-${product.id}` }
                 >
                   -
                 </Button>
@@ -134,7 +134,7 @@ const ProductsList = () => {
                 />
                 <Button
                   onClick={ () => { incQuant(product.id - 1); } }
-                  data-testid={ `customer_products__button-card-rm-item-${product.id}` }
+                  data-testid={ `customer_products__button-card-add-item-${product.id}` }
 
                 >
                   +
@@ -154,7 +154,11 @@ const ProductsList = () => {
         onClick={ () => navigate('/customer/checkout') }
         disabled={ isDisabled }
       >
-        {totalSales}
+        R$
+        {' '}
+        <span data-testid="customer_products__checkout-bottom-value">
+          {totalSales}
+        </span>
       </Button>
     </Container>
   );

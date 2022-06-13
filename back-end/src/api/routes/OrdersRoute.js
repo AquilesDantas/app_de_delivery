@@ -6,13 +6,24 @@ const router = Router();
 
 router.get(
   '/customer/orders',
-  AuthMiddleware.auhtenticate,
-  OrdersController.findAll,
+  AuthMiddleware.authenticate,
+  OrdersController.findOrdersByUserId,
 );
 router.get(
-  '/customer/orders/:id',
-  AuthMiddleware.auhtenticate,
+  '/orders/:id',
+  AuthMiddleware.authenticate,
   OrdersController.findOneBySaleId,
+);
+router.get(
+  '/seller/orders',
+  AuthMiddleware.authenticate,
+  OrdersController.findOrdersBySellerId,
+);
+
+router.patch(
+  '/orders/:id/update',
+  AuthMiddleware.authenticate,
+  OrdersController.updateSaleStatus,
 );
 
 module.exports = router;

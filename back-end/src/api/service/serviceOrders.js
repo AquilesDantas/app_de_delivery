@@ -1,4 +1,6 @@
+const { CustomError } = require('../Error/CustomErro');
 const { OrdersModel } = require('../model/ordersModel');
+const SaleModel = require('../model/saleModel');
 
 class OrdersService {
   static async findAll(userId) {
@@ -16,6 +18,14 @@ class OrdersService {
       code: 200,
       message: this.serializeOrder(sale),
     };
+  }
+
+  static async updateSaleStatus(id, status) {
+    const [saleDidUpdate] = await SaleModel.update(id, { status });
+    if (!saleDidUpdate) {
+      throw new CustomError('Not found', 404);
+    }
+    return { code: 200, message: status };
   }
 
   static serializeProducts(products) {

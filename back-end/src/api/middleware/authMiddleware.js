@@ -1,11 +1,15 @@
+const { CustomError } = require('../Error/CustomErro');
 const { ServiceAuth } = require('../service/serviceAuth');
 
 class AuthMiddleware {
-  static auhtenticate(req, res, next) {
+  static authenticate(req, res, next) {
     const { authorization } = req.headers;
-
-    if (!ServiceAuth.tokenValidation(authorization)) {
-      return res.status(401).json('Unauthorized user'); 
+    try {
+      if (!ServiceAuth.tokenValidation(authorization)) {
+        return res.status(401).json('Unauthorized user'); 
+      }
+    } catch (error) {
+      throw new CustomError('Invalid token', 401);
     }
     return next();
   }

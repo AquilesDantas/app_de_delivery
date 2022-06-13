@@ -6,12 +6,12 @@ const router = Router();
 
 router.get(
   '/sellers',
-  AuthMiddleware.auhtenticate,
+  AuthMiddleware.authenticate,
   CheckoutController.getSellers,
 );
 router.post(
   '/customer/checkout',
-  AuthMiddleware.auhtenticate,
+  AuthMiddleware.authenticate,
   CheckoutController.createSale,
 );
 

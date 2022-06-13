@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+}
+
+.navbar {
+  padding: 0.1rem;
+}
+
+.nav-item {
+  color: blanchedalmond;
+}
+
+.navbar-expand .navbar-nav {
+  align-content: space-around;
+  align-items: baseline;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.navbar-brand {
+  width: 10%;
+}
+
+.logo__ze-birita {
+  border-radius: 5rem;
+  display: flex;
+  margin: 0;
+  min-width: 5px;
+  width: 75%;
+}

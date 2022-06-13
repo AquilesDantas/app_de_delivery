@@ -1,0 +1,18 @@
+.card {
+  border-radius: 0 2rem;
+  box-shadow: 0 0.1rem 0.2rem;
+  height: 95%;
+  margin-bottom: 0.2rem;
+  margin-top: 0.2rem;
+}
+
+
+.card_image {
+  height: 70%;
+  width: 100%;
+}
+
+.card-img-top {
+  width: 140px;
+}
+

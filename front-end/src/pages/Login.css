@@ -1,7 +1,7 @@
 .login {
   align-items: center;
   background: rgb(230, 22, 22);
-  background-image: url('../images/bg-texture.png');
+  background-image: url('../assets/bg-texture.png');
   display: flex;
   flex-direction: column;
   line-height: 1.5;
@@ -9,17 +9,18 @@
 
 .logo__ze-birita {
   display: flex;
-  height: 35%;
+  height: 25%;
   justify-content: center;
   margin-bottom: 2rem;
   margin-top: 2rem;
-  width: 35%;
+  max-width: 35%;
+  width: 25%;
 }
 
 .logo__ze-birita__img {
   border-radius: 47%;
   display: flex;
-  min-width: 200px;
+  min-width: 150px;
   width: 60%;
 }
 
@@ -38,13 +39,9 @@
   margin-bottom: 0.8rem;
 }
 
-.button__register, .form__button {
+.button__register {
   border-radius: 0.3rem;
   padding: 0.2rem;
-}
-
-.form__button {
-  width: 50%;
 }
 
 .col-auto {

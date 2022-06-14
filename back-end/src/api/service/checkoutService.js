@@ -1,6 +1,7 @@
 const SaleModel = require('../model/saleModel');
 const SaleProductModel = require('../model/saleProductModel');
 const UserModel = require('../model/userModel');
+const OrderStatus = require('../util/OrderStatus');
 
 class CheckoutService {
   static async getSellers() {
@@ -11,6 +12,7 @@ class CheckoutService {
   static async createSale(saleInfo) {
     const saleDate = Date.now();
     const { sale, products } = saleInfo;
+    sale.status = OrderStatus.pendente;
     const newSale = await SaleModel.create({ ...sale, saleDate });
     products.forEach((product) => {
       SaleProductModel.create({

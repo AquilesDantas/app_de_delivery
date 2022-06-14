@@ -46,7 +46,7 @@ class OrdersService {
       saleDate: sale.saleDate,
       status: sale.status,
       sellerId: sale.sellerId,
-      seller: sale.sellerName,
+      seller: sale.seller.name,
       products: this.serializeProducts(sale.products),
     };
   }

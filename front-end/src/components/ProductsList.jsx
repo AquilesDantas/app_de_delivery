@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
-// import { setCard } from '../slices/selections';
+import { setCard, setTotal } from '../slices/selections';
 import './ProductList.css';
 
 const ProductsList = () => {
@@ -13,6 +13,7 @@ const ProductsList = () => {
   const [totalSales, setTotalSales] = useState(0);
   const [isDisabled, setIsDisabled] = useState(true);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const getProducts = async (auth) => {
     const BASE_URL = 'http://localhost:3001';
@@ -92,6 +93,12 @@ const ProductsList = () => {
     card();
   };
 
+  const hadleClickCard = () => {
+    dispatch(setCard(shopCard));
+    dispatch(setTotal(totalSales));
+    navigate('/customer/checkout');
+  };
+
   return (
     <Container className="cards__products">
       <Row className="justify-content-sm-center">
@@ -151,7 +158,7 @@ const ProductsList = () => {
         className="btn btn-primary"
         variant=""
         size="lg"
-        onClick={ () => navigate('/customer/checkout') }
+        onClick={ () => hadleClickCard() }
         disabled={ isDisabled }
       >
         R$

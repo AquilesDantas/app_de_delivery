@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCard, setTotal } from '../slices/selections';
 
 const ProductTable = () => {
-  const total = 300;
-  const itens = [
-    { id: 1, name: 'bebida1', quant: 10, price: 20 },
-    { id: 2, name: 'babida2', quant: 10, price: 10 },
-  ];
+  const totalSale = useSelector(({ data }) => data.total.payload);
+  const sales = useSelector(({ data }) => data.card.payload);
+
+  const [itens, setItens] = useState(sales);
+  const [total, setTotalSale] = useState(Number(totalSale.replace(',', '.')));
+
+  const dispatch = useDispatch();
+
+  const handleClick = (index) => {
+    const attItens = [...itens];
+    const { price, quantity } = attItens[index];
+    const interTotal = total - (Number(price) * quantity);
+    setTotalSale(interTotal);
+    attItens.splice(index, 1);
+    setItens(attItens);
+    dispatch(setCard(attItens));
+    dispatch(setTotal(interTotal.toFixed(2).replace('.', ',')));
+  };
+
   return (
     <table>
       <thead>
@@ -19,14 +35,18 @@ const ProductTable = () => {
         </tr>
       </thead>
       <tbody>
-        {itens.map((product) => (
+        {itens.map((product, index) => (
           <tr key={ product.id }>
-            <td>{product.id}</td>
+            <td>{index + 1}</td>
             <td>{product.name}</td>
-            <td>{product.quant}</td>
-            <td>{product.price}</td>
-            <td>{product.quant * product.price}</td>
-            <button type="submit">Remover</button>
+            <td>{product.quantity}</td>
+            <td>{product.price.replace('.', ',')}</td>
+            <td>
+              {(product.quantity * Number(product.price)).toFixed(2)
+                .replace('.', ',')}
+
+            </td>
+            <button type="submit" onClick={ () => handleClick(index) }>Remover</button>
           </tr>
         ))}
       </tbody>
@@ -34,7 +54,7 @@ const ProductTable = () => {
         <h4>
           Total:
           {' '}
-          {total}
+          {total.toFixed(2).replace('.', ',')}
         </h4>
       </div>
     </table>

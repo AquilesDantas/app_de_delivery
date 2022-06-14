@@ -22,6 +22,17 @@ export const postRegister = async (email, password, name) => {
   return newUser;
 };
 
+export const getSellers = async (token) => axios.get(`${BASE_URL}/sellers`, {
+  headers: {
+    Authorization: token,
+  } });
+
+export const postCheckout = async (order, token) => axios
+  .post(`${BASE_URL}/customer/checkout`, order, {
+    headers: {
+      Authorization: token,
+    } });
+
 // export const getProducts = async (token) => {
 //   try {
 //     const products = axios.get(`${BASE_URL}/customer/products`, {

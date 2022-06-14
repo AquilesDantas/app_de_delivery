@@ -38,6 +38,14 @@ class SalesProducts extends Model {}
 
 SalesProducts.init(
   {
+    saleId: {
+      primaryKey: true,  
+      type: DataTypes.INTEGER
+    },
+    productId:{
+      primaryKey: true,  
+      type: DataTypes.INTEGER
+    },
     quantity: DataTypes.INTEGER,
   },
   {
@@ -50,13 +58,18 @@ SalesProducts.init(
 );
 
 Product.belongsToMany(Sale, {
+  // foreignKey: 'saleId',
   as: 'sales',
   through: SalesProducts,
+  // other: 'productId',
 });
 
 Sale.belongsToMany(Product, {
+  // foreignKey: 'productId',
   as: 'products',
   through: SalesProducts,
+  // other: 'saleId',
 });
 
 module.exports = SalesProducts;
+console.log(SalesProducts.primaryKeyAttribute)

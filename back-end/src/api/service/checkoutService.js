@@ -16,8 +16,8 @@ class CheckoutService {
     const newSale = await SaleModel.create({ ...sale, saleDate });
     products.forEach((product) => {
       SaleProductModel.create({
-        productId: product.id,
         saleId: newSale.id,
+        productId: product.id,
         quantity: product.quantity,
       });
     });

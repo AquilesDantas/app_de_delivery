@@ -212,7 +212,7 @@ resposta:
   }
 ]
 ```
-### 08 - Seller Order Details
+### 09 - Seller Order Details
 - uri: localhost:3001/orders/:id
 - método: get
 - header: 

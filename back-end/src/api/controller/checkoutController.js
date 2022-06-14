@@ -14,7 +14,7 @@ class CheckoutController {
     try {
       const saleInfo = req.body;
       const newSale = await CheckoutService.createSale(saleInfo);
-      return res.status(200).json(newSale);
+      return res.status(201).json(newSale);
     } catch (error) {
       return next(error);
     }

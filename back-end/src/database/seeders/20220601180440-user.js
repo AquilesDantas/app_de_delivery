@@ -24,6 +24,18 @@ module.exports = {
         password: '1c37466c159755ce1fa181bd247cb925', 
         role: 'customer',
       },
+      {
+        name: 'Robert Martin',
+        email: 'unclebob@email.com',
+        password: '6c42120f7dd5bbd6db2819b1582563e4', // senha: unclebob
+        role: 'seller'
+      }, 
+      {
+        name: 'Ada Lovelace',
+        email: 'ada@email.com', 
+        password: '398e62b1556a0f7d4c769bd612c63989', // senha: 398e62b1556a0f7d4c769bd612c63989
+        role: 'customer',
+      }
     ], { timeStamps: false });
   },
   down: async (queryInterface) => {

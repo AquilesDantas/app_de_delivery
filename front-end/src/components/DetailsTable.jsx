@@ -8,7 +8,7 @@ const Details = () => {
   const [sellers, setSellers] = useState([]);
   const [address, setAddres] = useState('');
   const [sellerId, setSaller] = useState(0);
-  const [homeNumber, setHomeNumber] = useState(0);
+  const [homeNumber, setHomeNumber] = useState('');
   const token = useSelector(({ data }) => data.token.payload);
   const userId = useSelector(({ data }) => data.user.payload.id);
   const tPrice = useSelector(({ data }) => data.total.payload);
@@ -35,7 +35,7 @@ const Details = () => {
         sellerId,
         totalPrice: Number(tPrice.replace(',', '.')),
         deliveryAddress: address,
-        deliveryNumber: Number(homeNumber),
+        deliveryNumber: homeNumber,
       },
       products: card.map((product) => ({ id: product.id, quantity: product.quantity })),
     };

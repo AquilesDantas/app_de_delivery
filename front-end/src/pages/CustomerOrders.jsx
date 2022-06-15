@@ -3,13 +3,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import NavBar from '../components/NavBar';
+import { formattedDate } from '../helpers/validations';
 
 function CustomerOrders() {
   const token = useSelector(({ data }) => data.token.payload);
   const navigate = useNavigate();
 
   const [orders, setOrders] = useState([]);
-  const getOrdres = async (auth) => {
+  const getOrders = async (auth) => {
     const BASE_URL = 'http://localhost:3001';
 
     try {
@@ -25,18 +26,12 @@ function CustomerOrders() {
   };
 
   useEffect(() => {
-    getOrdres(token);
+    getOrders(token);
   }, [token]);
-
-  const formattedDate = (date) => {
-    const MAGIC_NUMBER = 10;
-    const ximira = date.slice(0, MAGIC_NUMBER);
-    return ximira.replaceAll('-', '/').split('/').reverse().join('/');
-  };
 
   const xablau = (id) => {
     navigate(`/customer/orders/${id}`);
-  }
+  };
 
   return (
     <>
@@ -85,3 +80,4 @@ function CustomerOrders() {
 }
 
 export default CustomerOrders;
+export { formattedDate };

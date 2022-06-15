@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCard, setTotal } from '../slices/selections';
+import checkoutIds from '../utils/checkoutIds';
 
 const ProductTable = () => {
   const totalSale = useSelector(({ data }) => data.total.payload);
@@ -37,21 +38,35 @@ const ProductTable = () => {
       <tbody>
         {itens.map((product, index) => (
           <tr key={ product.id }>
-            <td>{index + 1}</td>
-            <td>{product.name}</td>
-            <td>{product.quantity}</td>
-            <td>{product.price.replace('.', ',')}</td>
-            <td>
+            <td
+              data-testid={ checkoutIds.itemNumberId(index) }
+            >
+              {index + 1}
+            </td>
+            <td data-testid={ checkoutIds.itemNameId(index) }>{product.name}</td>
+            <td data-testid={ checkoutIds.itemQuantityId(index) }>
+              {product.quantity}
+            </td>
+            <td data-testid={ checkoutIds.itemPriceId(index) }>
+              {product.price.replace('.', ',')}
+            </td>
+            <td data-testid={ checkoutIds.itemSubTotalId(index) }>
               {(product.quantity * Number(product.price)).toFixed(2)
                 .replace('.', ',')}
 
             </td>
-            <button type="submit" onClick={ () => handleClick(index) }>Remover</button>
+            <button
+              type="submit"
+              onClick={ () => handleClick(index) }
+              data-testid={ checkoutIds.itemRemovalId(index) }
+            >
+              Remover
+            </button>
           </tr>
         ))}
       </tbody>
       <div>
-        <h4>
+        <h4 data-testid={ checkoutIds.totalPriceID() }>
           Total:
           {' '}
           {total.toFixed(2).replace('.', ',')}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getSellers, postCheckout } from '../API/Request';
+import checkoutIds from '../utils/checkoutIds';
 
 const Details = () => {
   const [sellers, setSellers] = useState([]);
@@ -13,14 +14,15 @@ const Details = () => {
   const tPrice = useSelector(({ data }) => data.total.payload);
   const card = useSelector(({ data }) => data.card.payload);
 
-  const facth = async () => {
+  const fecth = async () => {
     const Sellers = await getSellers(token);
     setSellers(Sellers.data);
     setSaller(Sellers.data[0].id);
   };
 
   useEffect(() => {
-    facth();
+    fecth();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const navigate = useNavigate();
@@ -37,12 +39,11 @@ const Details = () => {
       },
       products: card.map((product) => ({ id: product.id, quantity: product.quantity })),
     };
-    const tests = await postCheckout(order, token);
-    console.log(tests);
-    navigate('/customer/orders');
+    const { data } = await postCheckout(order, token);
+    console.log(data);
+    const { id } = data.newSale;
+    navigate(`/customer/orders/${id}`);
   };
-
-  console.log(sellers);
 
   const fullSallers = sellers.map((seller) => (
     <option key={ seller.id } value={ seller.id }>{seller.name}</option>
@@ -57,6 +58,7 @@ const Details = () => {
           <select
             id="seller"
             onChange={ ({ target }) => setSaller(target.value) }
+            data-testid={ checkoutIds.selectSellerId() }
           >
             {fullSallers}
           </select>
@@ -67,6 +69,7 @@ const Details = () => {
             id="address"
             type="text"
             onChange={ ({ target }) => setAddres(target.value) }
+            data-testid={ checkoutIds.inputAddressId() }
           />
         </label>
         <label htmlFor="homeNumber">
@@ -75,10 +78,13 @@ const Details = () => {
             id="homeNumber"
             type="number"
             onChange={ ({ target }) => setHomeNumber(target.value) }
+            data-testid={ checkoutIds.inputNumberId() }
           />
         </label>
 
-        <button type="submit">Finalizar Pedido</button>
+        <button type="submit" data-testid={ checkoutIds.submitOrderId() }>
+          Finalizar Pedido
+        </button>
 
       </form>
       {/* <table>

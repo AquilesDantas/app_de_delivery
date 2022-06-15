@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
-// import { setCard } from '../slices/selections';
 import './ProductList.css';
 
 const ProductsList = () => {

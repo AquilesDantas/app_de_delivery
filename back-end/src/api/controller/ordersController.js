@@ -48,6 +48,7 @@ class OrdersController {
     try {
       const { id } = req.params;
       const { status } = req.body;
+      console.log(status);
       const { code, message } = await OrdersService.updateSaleStatus(id, status);
       return res.status(code).json(message);
     } catch (error) {

@@ -92,11 +92,13 @@ const OrderTable = () => {
             ))
           }
         </table>
-        <section data-testid={ orderDetailsIds.totalPrice() }>
+        <section>
           TOTAL:
           {' '}
           R$
-          {sale.totalPrice}
+          <span data-testid={ orderDetailsIds.totalPrice() }>
+            {sale.totalPrice.replace('.', ',')}
+          </span>
         </section>
       </div>
     </div>

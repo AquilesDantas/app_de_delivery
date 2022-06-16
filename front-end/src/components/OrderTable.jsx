@@ -3,12 +3,13 @@ import { matchPath, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getSaleById, putStatusOrder } from '../API/Request';
 import './OrderTable.css';
+import orderDetailsIds from '../utils/customerOrderDetailsIds';
 
 const OrderTable = () => {
   const { pathname } = useLocation();
   const { params } = matchPath('/customer/orders/:id', pathname);
   const token = useSelector(({ data }) => data.token.payload);
-  const card = useSelector(({ data }) => data.card.payload);
+  // const card = useSelector(({ data }) => data.card.payload);
   const [status, setStatus] = useState('');
 
   const [sale, setSale] = useState();
@@ -26,6 +27,7 @@ const OrderTable = () => {
 
   useEffect(() => {
     fecth();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log(sale);
@@ -42,11 +44,21 @@ const OrderTable = () => {
         <h2>detalhes do pedido</h2>
       </div>
       <div className="detailPro">
-        <span>{sale.id}</span>
-        <span>{sale.seller}</span>
-        <span>{sale.saleDate}</span>
-        <span>{status}</span>
-        <button type="button" onClick={ () => put() }>marcar como entregue</button>
+        <span data-testid={ orderDetailsIds.orderId() }>{sale.id}</span>
+        <span data-testid={ orderDetailsIds.sellerName() }>{sale.seller}</span>
+        <span data-testid={ orderDetailsIds.orderDate() }>
+          {Intl.DateTimeFormat('pt-br').format(Date.parse(sale.saleDate))}
+        </span>
+        <span data-testid={ orderDetailsIds.deliveryStatus() }>{status}</span>
+        <button
+          type="button"
+          onClick={ () => put() }
+          data-testid={ orderDetailsIds.deliveryCheck() }
+          disabled
+        >
+          marcar como entregue
+
+        </button>
       </div>
       <div>
         <table id="details">
@@ -58,18 +70,18 @@ const OrderTable = () => {
             <th>SubTotal</th>
           </tr>
           {
-            card.map((product, i) => (
+            sale.products.map((product, i) => (
 
               <tr key={ i }>
-                <td>{i}</td>
-                <td>{ product.name }</td>
-                <td>{ product.quantity }</td>
-                <td>
+                <td data-testid={ orderDetailsIds.itemNumber(i) }>{i}</td>
+                <td data-testid={ orderDetailsIds.name(i) }>{ product.name }</td>
+                <td data-testid={ orderDetailsIds.quantity(i) }>{ product.quantity }</td>
+                <td data-testid={ orderDetailsIds.unitPrice(i) }>
                   R$
                   { ' ' }
                   { product.price.replace('.', ',') }
                 </td>
-                <td>
+                <td data-testid={ orderDetailsIds.subTotal(i) }>
                   R$
                   { ' ' }
                   { (product.quantity * Number(product.price))
@@ -80,7 +92,7 @@ const OrderTable = () => {
             ))
           }
         </table>
-        <section>
+        <section data-testid={ orderDetailsIds.totalPrice() }>
           TOTAL:
           {' '}
           R$

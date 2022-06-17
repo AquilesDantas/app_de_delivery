@@ -61,7 +61,7 @@ const OrderTable = () => {
         </button>
       </div>
       <div>
-        <table id="details">
+        <table className="details">
           <tr>
             <th>item</th>
             <th>Descrição</th>

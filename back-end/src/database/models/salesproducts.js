@@ -72,4 +72,3 @@ Sale.belongsToMany(Product, {
 });
 
 module.exports = SalesProducts;
-console.log(SalesProducts.primaryKeyAttribute)

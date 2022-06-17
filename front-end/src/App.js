@@ -4,10 +4,11 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import Checkout from './pages/Checkout';
-
+import CustomerOrder from './pages/CustomerOrders';
+import CustomerOrderDetail from './pages/CustomerOrderDetail';
+import SellerOrders from './pages/SellerOrders';
+import SellerOrderDetails from './pages/SellerOrderDetails';
 import './App.css';
-import CustomerOrders from './pages/CustomerOrders';
-import CustomerOrderDetails from './pages/CustomerOrderDetails';
 import AdminManage from './pages/AdminManage';
 
 function App() {
@@ -18,10 +19,12 @@ function App() {
         <Route exact path="/login" element={ <Login /> } />
         <Route path="/register" element={ <Register /> } />
         <Route path="/customer/products" element={ <Products /> } />
-        <Route path="/customer/checkout" element={ <Checkout /> } />
-        <Route path="/customer/orders" element={ <CustomerOrders /> } />
-        <Route path="/customer/orders/:id" element={ <CustomerOrderDetails /> } />
+        <Route path="/customer/checkout" element={ <Checkout /> } />  
         <Route path="/admin/manage" element={ <AdminManage /> } />
+        <Route path="/seller/orders" element={ <SellerOrders /> } />
+        <Route path="/seller/orders/:id" element={ <SellerOrderDetails /> } />
+        <Route path="/customer/orders" element={ <CustomerOrder /> } />
+        <Route path="/customer/orders/:id" element={ <CustomerOrderDetail /> } />
       </Routes>
     </BrowserRouter>
   );

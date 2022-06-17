@@ -7,3 +7,9 @@ const TWELVE = 12;
 export const validatePassword = (pass) => pass && pass.length >= SIX;
 
 export const validateName = (name) => name && name.length >= TWELVE;
+
+export const formattedDate = (date) => {
+  const MAGIC_NUMBER = 10;
+  const ximira = date.slice(0, MAGIC_NUMBER);
+  return ximira.replaceAll('-', '/').split('/').reverse().join('/');
+};

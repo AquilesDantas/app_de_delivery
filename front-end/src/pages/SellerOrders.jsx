@@ -40,11 +40,10 @@ function SellerOrders() {
       <div className="orders__list">
         {orders && orders
           .map((order, index) => (
-            <a
-              href=""
+            <button
+              type="button"
               key={ index }
               onClick={ () => xablau(order.id) }
-              // style="text-decoration: none"
             >
               <div className="card__order-ximira">
                 <div className="card__order">
@@ -81,7 +80,7 @@ function SellerOrders() {
                   { order.deliveryNumber }
                 </p>
               </div>
-            </a>))}
+            </button>))}
       </div>
     </>
   );

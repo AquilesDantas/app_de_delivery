@@ -8,6 +8,8 @@ import CustomerOrder from './pages/customerOrders';
 import CustomerOrderDetail from './pages/CustomerOrderDetail';
 
 import './App.css';
+import CustomerOrders from './pages/CustomerOrders';
+import CustomerOrderDetails from './pages/CustomerOrderDetails';
 
 function App() {
   return (

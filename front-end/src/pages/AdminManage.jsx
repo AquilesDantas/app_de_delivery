@@ -51,7 +51,6 @@ function AdminManage() {
         passwordRegister,
         typeRegister,
       );
-      
       // console.log(response);
       setHidden(true);
       formRegister.reset();

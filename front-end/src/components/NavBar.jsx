@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser, setToken } from '../slices/selections';
+import { setUser, setToken, setCard, setTotal } from '../slices/selections';
 import TagP from '../assets/tagP.png';
 import './NavBar.css';
 
@@ -21,6 +21,8 @@ const NavBar = () => {
   const checkout = () => {
     dispatch(setUser(initialState));
     dispatch(setToken(null));
+    dispatch(setCard([]));
+    dispatch(setTotal(0));
     localStorage.clear();
     navigate('/login');
   };

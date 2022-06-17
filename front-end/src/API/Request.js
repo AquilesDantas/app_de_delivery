@@ -22,6 +22,29 @@ export const postRegister = async (email, password, name) => {
   return newUser;
 };
 
+export const getSellers = async (token) => axios.get(`${BASE_URL}/sellers`, {
+  headers: {
+    Authorization: token,
+  } });
+
+export const postCheckout = async (order, token) => axios
+  .post(`${BASE_URL}/customer/checkout`, order, {
+    headers: {
+      Authorization: token,
+    } });
+
+export const getSaleById = async (id, token) => axios
+  .get(`${BASE_URL}/orders/${id}`, {
+    headers: {
+      Authorization: token,
+    } });
+
+export const putStatusOrder = async (id, status, token) => axios
+  .patch(`${BASE_URL}/orders/${id}/update`, {
+    headers: {
+      Authorization: token,
+    } });
+
 // export const getProducts = async (token) => {
 //   try {
 //     const products = axios.get(`${BASE_URL}/customer/products`, {

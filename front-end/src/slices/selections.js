@@ -11,6 +11,7 @@ export const userSlice = createSlice(
       },
       token: '',
       card: [],
+      total: 0,
     },
     reducers: {
       setUser: (state, action) => {
@@ -22,9 +23,12 @@ export const userSlice = createSlice(
       setCard: (state, action) => {
         state.card = action;
       },
+      setTotal: (state, action) => {
+        state.total = action;
+      },
     },
   },
 );
 
-export const { setUser, setToken, setCard } = userSlice.actions;
+export const { setUser, setToken, setCard, setTotal } = userSlice.actions;
 export default userSlice.reducer;

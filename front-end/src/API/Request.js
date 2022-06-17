@@ -22,15 +22,14 @@ export const postRegister = async (email, password, name) => {
   return newUser;
 };
 
-// export const getProducts = async (token) => {
-//   try {
-//     const products = axios.get(`${BASE_URL}/customer/products`, {
-//       headers: {
-//         Authorization: token,
-//       } });
+export const postAdminRegister = async (name, email, password, role) => {
+  const newUser = await axios
+    .post(`${BASE_URL}/users`, {
+      name,
+      email,
+      password,
+      role,
+    });
 
-//     return (await products);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+  return newUser;
+};

@@ -9,6 +9,7 @@ import CustomerOrderDetail from './pages/CustomerOrderDetail';
 import SellerOrders from './pages/SellerOrders';
 import SellerOrderDetails from './pages/SellerOrderDetails';
 import './App.css';
+import AdminManage from './pages/AdminManage';
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
         <Route exact path="/login" element={ <Login /> } />
         <Route path="/register" element={ <Register /> } />
         <Route path="/customer/products" element={ <Products /> } />
-        <Route path="/customer/checkout" element={ <Checkout /> } />
+        <Route path="/customer/checkout" element={ <Checkout /> } />  
+        <Route path="/admin/manage" element={ <AdminManage /> } />
         <Route path="/seller/orders" element={ <SellerOrders /> } />
         <Route path="/seller/orders/:id" element={ <SellerOrderDetails /> } />
         <Route path="/customer/orders" element={ <CustomerOrder /> } />

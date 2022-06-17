@@ -22,6 +22,22 @@ export const postRegister = async (email, password, name) => {
   return newUser;
 };
 
+export const postAdminRegister = async (token, name, email, password, role) => {
+  const newUser = await axios
+    .post(`${BASE_URL}/users`,
+    {
+      name,
+      email,
+      password,
+      role,
+    },
+    {
+      headers: {
+        Authorization: token,
+      }
+    },
+);
+=======
 export const getSellers = async (token) => axios.get(`${BASE_URL}/sellers`, {
   headers: {
     Authorization: token,
@@ -45,15 +61,5 @@ export const putStatusOrder = async (id, status, token) => axios
       Authorization: token,
     } });
 
-// export const getProducts = async (token) => {
-//   try {
-//     const products = axios.get(`${BASE_URL}/customer/products`, {
-//       headers: {
-//         Authorization: token,
-//       } });
-
-//     return (await products);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+  return newUser;
+};

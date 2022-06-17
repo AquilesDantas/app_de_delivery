@@ -1,8 +1,8 @@
 const OrderStatus = {
-  emTransito: 'EM TRÂNSITO',
-  enTregue: 'ENTREGUE',
-  pendente: 'PENDENTE',
-  preparando: 'PREPARANDO',
+  emTransito: 'Em Trânsito',
+  enTregue: 'Entregue',
+  pendente: 'Pendente',
+  preparando: 'Preparando',
 };
 
 module.exports = OrderStatus;

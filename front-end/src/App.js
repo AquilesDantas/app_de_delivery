@@ -4,8 +4,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import Checkout from './pages/Checkout';
-import CustomerOrders from './pages/CustomerOrders';
-import CustomerOrderDetails from './pages/CustomerOrderDetails';
+import CustomerOrder from './pages/customerOrders';
+import CustomerOrderDetail from './pages/CustomerOrderDetail';
 import SellerOrders from './pages/SellerOrders';
 import SellerOrderDetails from './pages/SellerOrderDetails';
 import './App.css';
@@ -19,10 +19,10 @@ function App() {
         <Route path="/register" element={ <Register /> } />
         <Route path="/customer/products" element={ <Products /> } />
         <Route path="/customer/checkout" element={ <Checkout /> } />
-        <Route path="/customer/orders" element={ <CustomerOrders /> } />
-        <Route path="/customer/orders/:id" element={ <CustomerOrderDetails /> } />
         <Route path="/seller/orders" element={ <SellerOrders /> } />
         <Route path="/seller/orders/:id" element={ <SellerOrderDetails /> } />
+        <Route path="/customer/orders" element={ <CustomerOrder /> } />
+        <Route path="/customer/orders/:id" element={ <CustomerOrderDetail /> } />
       </Routes>
     </BrowserRouter>
   );

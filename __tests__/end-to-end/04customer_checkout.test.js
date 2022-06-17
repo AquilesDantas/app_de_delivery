@@ -166,7 +166,6 @@ describe(requirement(21), () => {
       },
       global.__TESTDESC__
     );
-
     await expect(database).toReturnDataWith({
       query: [sales.query, "WHERE id = ?"].join(" "),
       values: [saleId],

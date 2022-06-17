@@ -27,7 +27,6 @@ const OrderTable = () => {
 
   useEffect(() => {
     fecth();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log(sale);

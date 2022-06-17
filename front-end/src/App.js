@@ -6,10 +6,9 @@ import Products from './pages/Products';
 import Checkout from './pages/Checkout';
 import CustomerOrder from './pages/customerOrders';
 import CustomerOrderDetail from './pages/CustomerOrderDetail';
-
+import SellerOrders from './pages/SellerOrders';
+import SellerOrderDetails from './pages/SellerOrderDetails';
 import './App.css';
-import CustomerOrders from './pages/CustomerOrders';
-import CustomerOrderDetails from './pages/CustomerOrderDetails';
 
 function App() {
   return (
@@ -20,6 +19,8 @@ function App() {
         <Route path="/register" element={ <Register /> } />
         <Route path="/customer/products" element={ <Products /> } />
         <Route path="/customer/checkout" element={ <Checkout /> } />
+        <Route path="/seller/orders" element={ <SellerOrders /> } />
+        <Route path="/seller/orders/:id" element={ <SellerOrderDetails /> } />
         <Route path="/customer/orders" element={ <CustomerOrder /> } />
         <Route path="/customer/orders/:id" element={ <CustomerOrderDetail /> } />
       </Routes>

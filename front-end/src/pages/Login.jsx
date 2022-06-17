@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Form, Button, Row, Col, Alert } from 'react-bootstrap';
-import { Link, Navigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUser, setToken } from '../slices/selections';
 import { postLogin } from '../API/Request';
 import logo from '../assets/ZéBirita.jpeg';
@@ -14,7 +14,9 @@ const Login = () => {
   const [isDisable, setIsDisable] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [nextPage, setNextPage] = useState(false);
+  // const dataUser = useSelector(({ data }) => data.user.payload);
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -23,6 +25,16 @@ const Login = () => {
   const validatePassword = (pass) => pass && pass.length >= MAGIC_NUMBER;
 
   const validateEmail = (mail) => mail && /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(mail);
+
+  const redirect = (role) => {
+    if (role === 'customer') {
+      navigate('/customer/products');
+    } else if (role === 'seller') {
+      navigate('/seller/orders');
+    } else if (role === 'administrator') {
+      navigate('/admin/manage');
+    }
+  };
 
   useEffect(() => {
     if (validateEmail(email) && validatePassword(password)) {
@@ -57,7 +69,7 @@ const Login = () => {
       dispatch(setToken(token));
       setStorage(user.name, user.role, token);
       setHidden(true);
-      setNextPage(true);
+      redirect(user.role);
       formLogin.reset();
     } catch (error) {
       console.log(error);
@@ -136,7 +148,6 @@ const Login = () => {
           </span>
         </Alert>
       )}
-      {nextPage && (<Navigate from="/login" to="/customer/products" />)}
     </div>
   );
 };

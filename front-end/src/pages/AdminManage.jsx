@@ -1,24 +1,29 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Navbar, Container, Nav, Form, Button, Row, Col } from 'react-bootstrap';
+import { Navbar, Container, Nav, Form, Button, Row, Col, Alert } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser, setToken } from '../slices/selections';
 import TagP from '../assets/tagP.png';
-import '../components/NavBar.css';
 import { postAdminRegister } from '../API/Request';
+import { validateEmail, validateName, validatePassword } from '../helpers/validations';
+import '../components/NavBar.css';
 
 function AdminManage() {
   const name = useSelector(({ data }) => data.user.payload.name);
+  const token = useSelector(({ data }) => data.token.payload);
+
   const initialState = {
     id: null,
     name: '',
     role: '',
   };
+  const [message, setMessage] = useState('');
+  const [hidden, setHidden] = useState(true);
   const [isDisable, setIsDisable] = useState(true);
+  const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
   const checkout = () => {
@@ -39,24 +44,33 @@ function AdminManage() {
     const typeRegister = formRegister.tipo.value;
 
     try {
-      const response = await postAdminRegister(
+      await postAdminRegister(
+        token,
         nameRegister,
         emailRegister,
         passwordRegister,
         typeRegister,
       );
       
-      console.log(response);
-      // setStorage(user.name, user.role, token);
-      // setHidden(true);
-      // setNextPage(true);
+      // console.log(response);
+      setHidden(true);
       formRegister.reset();
     } catch (error) {
       console.log(error);
-      // setMessage(error.response.data);
-      // setHidden(false);
+      setMessage(error.response.data);
+      setHidden(false);
     }
   };
+
+  useEffect(() => {
+    if (validateName(userName)
+      && validateEmail(email)
+      && validatePassword(password)) {
+      setIsDisable(false);
+    } else {
+      setIsDisable(true);
+    }
+  }, [userName, password, email]);
 
   return (
     <>
@@ -96,7 +110,7 @@ function AdminManage() {
                 data-testid="admin_manage__input-name"
                 id="input-name"
                 name="nome"
-                onChange={ ({ target }) => setEmail(target.value) }
+                onChange={ ({ target }) => setUserName(target.value) }
                 placeholder="nome e sobrenome"
                 required
               />
@@ -124,7 +138,7 @@ function AdminManage() {
                 type="password"
                 id="input-password"
                 name="password"
-                onChange={ ({ target }) => setEmail(target.value) }
+                onChange={ ({ target }) => setPassword(target.value) }
                 required
               />
             </Form.Group>
@@ -136,11 +150,11 @@ function AdminManage() {
                 data-testid="admin_manage__select-role"
                 id="type-select"
                 name="tipo"
-                defaultValue="cliente"
+                defaultValue="customer"
               >
-                <option>cliente</option>
-                <option>vendedor</option>
-                <option>admin</option>
+                <option>customer</option>
+                <option>saller</option>
+                <option>administrator</option>
               </Form.Select>
             </Form.Group>
           </Col>
@@ -148,12 +162,21 @@ function AdminManage() {
             <Button
               data-testid="admin_manage__button-register"
               type="submit"
+              disabled={ isDisable }
             >
               Cadastrar
             </Button>
           </Col>
         </Row>
       </Form>
+      {!hidden && (
+        <Alert variant="danger" onClose={ () => setHidden(true) } dismissible>
+          <Alert.Heading>Ops! Something wrong does not right...</Alert.Heading>
+          <span>
+            {message}
+          </span>
+        </Alert>
+      )}
     </>
   );
 }

@@ -22,14 +22,21 @@ export const postRegister = async (email, password, name) => {
   return newUser;
 };
 
-export const postAdminRegister = async (name, email, password, role) => {
+export const postAdminRegister = async (token, name, email, password, role) => {
   const newUser = await axios
-    .post(`${BASE_URL}/users`, {
+    .post(`${BASE_URL}/users`,
+    {
       name,
       email,
       password,
       role,
-    });
+    },
+    {
+      headers: {
+        Authorization: token,
+      }
+    },
+);
 
   return newUser;
 };

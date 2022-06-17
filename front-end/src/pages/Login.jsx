@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUser, setToken } from '../slices/selections';
 import { postLogin } from '../API/Request';
 import logo from '../assets/ZéBirita.jpeg';
-
+import { validateEmail, validatePassword } from '../helpers/validations';
 import './Login.css';
 
 const Login = () => {
@@ -19,12 +19,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-
-  const MAGIC_NUMBER = 6;
-
-  const validatePassword = (pass) => pass && pass.length >= MAGIC_NUMBER;
-
-  const validateEmail = (mail) => mail && /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(mail);
 
   const redirect = (role) => {
     if (role === 'customer') {

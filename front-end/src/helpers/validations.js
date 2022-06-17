@@ -1,12 +1,12 @@
 export const validateEmail = (mail) => mail && /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
   .test(mail);
 
-const six = 6;
-const twelve = 12;
+const SIX = 6;
+const TWELVE = 12;
 
-export const validatePassword = (pass) => pass && pass.length >= six;
+export const validatePassword = (pass) => pass && pass.length >= SIX;
 
-export const validateName = (name) => name && name.length >= twelve;
+export const validateName = (name) => name && name.length >= TWELVE;
 
 export const formattedDate = (date) => {
   const MAGIC_NUMBER = 10;

@@ -5,7 +5,7 @@ import { getSaleById, putStatusOrder } from '../API/Request';
 import './OrderTable.css';
 import orderDetailsIds from '../utils/customerOrderDetailsIds';
 
-const OrderTable = () => {
+const SellerOrderTable = () => {
   const { pathname } = useLocation();
   const { params } = matchPath('/customer/orders/:id', pathname);
   const token = useSelector(({ data }) => data.token.payload);
@@ -103,4 +103,4 @@ const OrderTable = () => {
   );
 };
 
-export default OrderTable;
+export default SellerOrderTable;

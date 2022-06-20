@@ -1,34 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { matchPath, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getSaleById, putStatusOrder } from '../API/Request';
+import { getSaleById, putStatusSellerOrder } from '../API/Request';
 import './OrderTable.css';
-import orderDetailsIds from '../utils/customerOrderDetailsIds';
+import orderDetailsIds from '../utils/sellerOderDetailsIds';
 
 const SellerOrderTable = () => {
   const { pathname } = useLocation();
-  const { params } = matchPath('/customer/orders/:id', pathname);
+  const { params } = matchPath('/seller/orders/:id', pathname);
   const token = useSelector(({ data }) => data.token.payload);
-  // const card = useSelector(({ data }) => data.card.payload);
   const [status, setStatus] = useState('');
   const [sale, setSale] = useState();
 
   const fecth = async () => {
+    console.log(params);
     const getSale = await getSaleById(params.id, token);
     setSale(getSale.data);
     setStatus(getSale.data.status);
   };
 
-  const put = async () => {
-    const updateStatus = await putStatusOrder(params.id, 'entregue', token);
+  const put = async (orderStatus) => {
+    const updateStatus = await putStatusSellerOrder(params.id, orderStatus, token);
     console.log(updateStatus);
+    setStatus(updateStatus.data);
   };
 
   useEffect(() => {
     fecth();
   }, []);
-
-  console.log(sale);
 
   if (!sale) {
     return (
@@ -50,11 +49,28 @@ const SellerOrderTable = () => {
         <span data-testid={ orderDetailsIds.deliveryStatus() }>{status}</span>
         <button
           type="button"
-          onClick={ () => put() }
-          data-testid={ orderDetailsIds.deliveryCheck() }
-          disabled
+          onClick={ () => put('Preparando') }
+          data-testid={ orderDetailsIds.preparingCheck() }
+          disabled={
+            status.match(/preparando/i)
+            || status.match(/em trânsito/i)
+            || status.match(/entregue/i)
+          }
         >
-          marcar como entregue
+          PREPARAR PEDIDO
+
+        </button>
+        <button
+          type="button"
+          onClick={ () => put('Em Trânsito') }
+          data-testid={ orderDetailsIds.dispatchCheck() }
+          disabled={
+            status.match(/pendente/i)
+            || status.match(/em trânsito/i)
+            || status.match(/entregue/i)
+          }
+        >
+          SAIU PARA ENTREGA
 
         </button>
       </div>

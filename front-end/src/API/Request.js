@@ -22,19 +22,22 @@ export const postRegister = async (email, password, name) => {
   return newUser;
 };
 
-export const postAdminRegister = async (token, name, email, password, role) => {
-  const newUser = await axios.post(`${BASE_URL}/users`,
-    {
-      name,
-      email,
-      password,
-      role,
-    },
-    {
-      headers: {
-        Authorization: token,
+export const postAdminRegister = async (token, user) => {
+  const { name, email, password, role } = user;
+  const newUser = await axios
+    .post(`${BASE_URL}/users`,
+      {
+        name,
+        email,
+        password,
+        role,
       },
-    });
+      {
+        headers: {
+          Authorization: token,
+        },
+      });
+  return newUser;
 };
 
 export const getSellers = async (token) => axios.get(`${BASE_URL}/sellers`, {
@@ -54,11 +57,14 @@ export const getSaleById = async (id, token) => axios
       Authorization: token,
     } });
 
-export const putStatusOrder = async (id, status, token) => {
-  axios.patch(`${BASE_URL}/orders/${id}/update`, {
+export const putStatusOrder = async (id, status, token) => axios
+  .patch(`${BASE_URL}/orders/${id}/update`, {
     headers: {
       Authorization: token,
     } });
 
-  return newUser;
-};
+export const putStatusSellerOrder = async (id, status, token) => axios
+  .patch(`${BASE_URL}/orders/${id}/update`, { status }, {
+    headers: {
+      Authorization: token,
+    } });

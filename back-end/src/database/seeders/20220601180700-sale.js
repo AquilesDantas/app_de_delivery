@@ -15,6 +15,24 @@ module.exports = {
         sale_date: new Date()
       },
       {
+        user_id: 3,
+        seller_id: 2,
+        total_price: 59.5,
+        delivery_address: "Endereço",
+        delivery_number: 1000,
+        status: OrderStatus.pendente,
+        sale_date: new Date()
+      },
+      {
+        user_id: 3,
+        seller_id: 2,
+        total_price: 59.5,
+        delivery_address: "Endereço",
+        delivery_number: 1000,
+        status: OrderStatus.pendente,
+        sale_date: new Date()
+      },
+      {
         user_id: 5,
         seller_id: 4,
         total_price: 59.5,
@@ -25,25 +43,7 @@ module.exports = {
       },
       {
         user_id: 5,
-        seller_id: 2,
-        total_price: 59.5,
-        delivery_address: "Endereço",
-        delivery_number: 1000,
-        status: OrderStatus.pendente,
-        sale_date: new Date()
-      },
-      {
-        user_id: 3,
         seller_id: 4,
-        total_price: 59.5,
-        delivery_address: "Endereço",
-        delivery_number: 1000,
-        status: OrderStatus.pendente,
-        sale_date: new Date()
-      },
-      {
-        user_id: 3,
-        seller_id: 2,
         total_price: 59.5,
         delivery_address: "Endereço",
         delivery_number: 1000,

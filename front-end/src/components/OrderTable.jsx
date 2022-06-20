@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { matchPath, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getSaleById, putStatusOrder } from '../API/Request';
+import { getSaleById, putStatusSellerOrder } from '../API/Request';
 import './OrderTable.css';
 import orderDetailsIds from '../utils/customerOrderDetailsIds';
 
@@ -20,7 +20,8 @@ const OrderTable = () => {
   };
 
   const put = async () => {
-    const updateStatus = await putStatusOrder(params.id, 'entregue', token);
+    const updateStatus = await putStatusSellerOrder(params.id, 'Entregue', token);
+    setStatus(updateStatus.data);
     console.log(updateStatus);
   };
 
@@ -52,7 +53,11 @@ const OrderTable = () => {
           type="button"
           onClick={ () => put() }
           data-testid={ orderDetailsIds.deliveryCheck() }
-          disabled
+          disabled={
+            status.match(/pendente/i)
+            || status.match(/preparando/i)
+            || status.match(/entregue/i)
+          }
         >
           marcar como entregue
 

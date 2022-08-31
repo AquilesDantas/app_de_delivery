@@ -1,3 +1,3 @@
 App de delivery
 
-:hammer_and_wrench:	App under construction
+:hammer_and_wrench:	App em construção

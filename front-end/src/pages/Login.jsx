@@ -14,7 +14,6 @@ const Login = () => {
   const [isDisable, setIsDisable] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const dataUser = useSelector(({ data }) => data.user.payload);
 
   const navigate = useNavigate();
 

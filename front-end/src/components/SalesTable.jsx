@@ -24,7 +24,7 @@ const ProductTable = () => {
   };
 
   return (
-    <table>
+    <table class="details">
       <thead>
         <tr>
           <th>Item</th>
@@ -55,13 +55,16 @@ const ProductTable = () => {
                 .replace('.', ',')}
 
             </td>
-            <button
-              type="submit"
-              onClick={ () => handleClick(index) }
-              data-testid={ checkoutIds.itemRemovalId(index) }
-            >
-              Remover
-            </button>
+            <div class="d-grid gap-2">
+              <button
+                type="submit"
+                class="btn btn-warning"
+                onClick={ () => handleClick(index) }
+                data-testid={ checkoutIds.itemRemovalId(index) }
+              >
+                Remover
+              </button>
+            </div>
           </tr>
         ))}
       </tbody>

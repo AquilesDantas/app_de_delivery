@@ -50,62 +50,54 @@ const Details = () => {
   return (
     <div>
       <h3>Detalhes e Endereço para Entrega</h3>
-
       <form onSubmit={ (e) => handleSubmit(e) }>
-        <label htmlFor="seller">
-          p. vendedora Responsavel
+        <div class="input-group input-group-lg">
+          <span class="input-group-text" id="inputGroup-sizing-lg">Pessoa Vendedora</span>
           <select
             id="seller"
+            class="form-control"
+            aria-label="Sizing example input"
             onChange={ ({ target }) => setSaller(target.value) }
             data-testid={ checkoutIds.selectSellerId() }
           >
             {fullSallers}
           </select>
-        </label>
-        <label htmlFor="address">
-          Endereço
+        </div>
+
+        <div class="input-group input-group-lg">
+          <span class="input-group-text" id="inputGroup-sizing-lg">Endereço</span>
           <input
             id="address"
             type="text"
+            class="form-control"
+            aria-label="Sizing example input"
             onChange={ ({ target }) => setAddres(target.value) }
             data-testid={ checkoutIds.inputAddressId() }
           />
-        </label>
-        <label htmlFor="homeNumber">
-          Número
+        </div>
+
+        <div class="input-group input-group-lg">
+          <span class="input-group-text" id="inputGroup-sizing-lg">Número</span>
           <input
             id="homeNumber"
             type="number"
+            class="form-control"
+            aria-label="Sizing example input"
             onChange={ ({ target }) => setHomeNumber(target.value) }
             data-testid={ checkoutIds.inputNumberId() }
           />
-        </label>
-
-        <button type="submit" data-testid={ checkoutIds.submitOrderId() }>
-          Finalizar Pedido
-        </button>
-
+        </div>
+        <div class="d-grid gap-2">
+          <button
+          type="submit"
+          class="btn btn-success btn-lg"
+          data-testid={ checkoutIds.submitOrderId() }>
+            Finalizar Pedido
+          </button>
+        </div>
       </form>
-      {/* <table>
-        <thead>
-          <tr>
-            <th>P. Vendedora Responsável</th>
-            <th>Endereço</th>
-            <th>Numero</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><select>{fullSallers}</select></td>
-            <td><input type="text" /></td>
-            <td><input type="text" /></td>
-            <button type="submit">Finalizar Pedido</button>
-          </tr>
-        </tbody>
-      </table> */}
     </div>
   );
 };
 
 export default Details;
-//

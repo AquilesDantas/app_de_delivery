@@ -1,5 +1,9 @@
 # App de Delivery
 
+<div align="center">
+<img src="https://user-images.githubusercontent.com/83843770/211177757-628db859-3d7d-4c97-9497-17898ad3b79b.png" width="700px" />
+</div>
+<br/>
 Este projeto tem como objetivo, simular a compra de bebidas atraves de um site, onde o usuário pode se identificar através de um login, escolher produtos, e caso seja admistrador ou vendendor validar e finalizar as compras realizadas pelos clientes.
 O projeto foi desenvolvido com as seguintes tecnologias: JavaScript, Node.Js, CSS, Bootstrap, React, MySQL, Express, Sequelize.
 	
